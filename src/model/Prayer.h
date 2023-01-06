@@ -15,12 +15,12 @@ struct Prayer : public Object {
 
     Name name;
     uint32_t time;
-    uint32_t offset;
+    int16_t offset;
 
     Prayer(const bool& IsValid = true)
         : m_IsValid(IsValid) {}
 
-    Prayer(Name name, uint32_t time, uint32_t offset)
+    Prayer(Name name, uint32_t time, int16_t offset)
         : name(name),
           time(time),
           offset(offset),
@@ -45,7 +45,6 @@ struct Prayer : public Object {
             m_IsValid = false;
             return;
         }
-
     }
 
     String toString() const override {
@@ -65,7 +64,7 @@ struct Prayer : public Object {
         return 3;
     }
 
-    bool IsValid() const override {
+    bool isValid() const override {
         return m_IsValid;
     }
 
