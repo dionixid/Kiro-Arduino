@@ -816,6 +816,10 @@ bool Any::operator==(const unsigned short &e) const {
     return _compareTo(e) == 0;
 }
 
+bool Any::operator==(const unsigned int &e) const {
+    return _compareTo(e) == 0;
+}
+
 bool Any::operator==(const unsigned long &e) const {
     return _compareTo(e) == 0;
 }
@@ -3195,4 +3199,3 @@ String AnyParser::serialize(const String &value) {
     result.replace(String(AnyParser::STRING_BRACKET), String(AnyParser::ESCAPE_STRING_BRACKET));
     return String(STRING_BRACKET) + result + String(STRING_BRACKET);
 }
-
