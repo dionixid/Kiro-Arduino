@@ -8,19 +8,19 @@ struct Device : public Object {
     String name;
 
     Device(const bool& isValid = true)
-        : m_isValid(isValid) {}
+        : m_IsValid(isValid) {}
 
     Device(String id, String name)
-        : id(id), name(name), m_isValid(true) {}
+        : id(id), name(name), m_IsValid(true) {}
 
     void constructor(const std::vector<Any>& tokens) override {
         if (tokens.size() != size()) {
-            m_isValid = false;
+            m_IsValid = false;
             return;
         }
 
         if (!tokens[0].isString() || !tokens[1].isString()) {
-            m_isValid = false;
+            m_IsValid = false;
             return;
         }
 
@@ -45,8 +45,8 @@ struct Device : public Object {
         return 2;
     }
 
-    bool isValid() const override {
-        return m_isValid;
+    bool IsValid() const override {
+        return m_IsValid;
     }
 
     Object* clone() const override {
@@ -54,7 +54,7 @@ struct Device : public Object {
     }
 
    private:
-    bool m_isValid;
+    bool m_IsValid;
 };
 
 #endif

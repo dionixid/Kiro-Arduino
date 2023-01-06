@@ -57,7 +57,7 @@ bool Object::operator!=(const Object &other) const {
  * @return true if this Object is truthy. false otherwise.
  */
 Object::operator bool() const {
-    return isValid();
+    return IsValid();
 }
 
 /*-----------------------------------------------------------
@@ -3195,3 +3195,4 @@ String AnyParser::serialize(const String &value) {
     result.replace(String(AnyParser::STRING_BRACKET), String(AnyParser::ESCAPE_STRING_BRACKET));
     return String(STRING_BRACKET) + result + String(STRING_BRACKET);
 }
+
