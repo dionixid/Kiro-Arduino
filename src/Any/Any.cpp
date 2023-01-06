@@ -57,7 +57,7 @@ bool Object::operator!=(const Object &other) const {
  * @return true if this Object is truthy. false otherwise.
  */
 Object::operator bool() const {
-    return IsValid();
+    return isValid();
 }
 
 /*-----------------------------------------------------------

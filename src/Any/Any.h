@@ -62,7 +62,7 @@ class Object : public Printable {
      *
      * @return true if this Object is truthy. false otherwise.
      */
-    virtual bool IsValid() const = 0;
+    virtual bool isValid() const = 0;
 
     /**
      * @brief Get the size of this Object.
