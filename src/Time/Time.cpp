@@ -321,7 +321,7 @@ void UTime::enableRTC() {
     _lastUpdate = millis();
     if (!_isTimeUpdateRegistered) {
         _isTimeUpdateRegistered = true;
-        Timer.setInterval(1000, _timeUpdater);
+        Timer::setInterval(1000, _timeUpdater);
     }
 }
 
@@ -332,7 +332,7 @@ void UTime::enableNTP() {
 #endif
     if (!_isTimeUpdateRegistered) {
         _isTimeUpdateRegistered = true;
-        Timer.setInterval(1000, _timeUpdater);
+        Timer::setInterval(1000, _timeUpdater);
     }
 }
 
@@ -427,7 +427,7 @@ void UTime::onMinuteChange(VoidCallback callback) {
     _onMinuteChanged = callback;
     if (!_isChangeDetectorRegistered) {
         _isChangeDetectorRegistered = true;
-        Timer.setInterval(1000, _changeDetector);
+        Timer::setInterval(1000, _changeDetector);
     }
 }
 
@@ -435,7 +435,7 @@ void UTime::onHourChange(VoidCallback callback) {
     _onHourChanged = callback;
     if (!_isChangeDetectorRegistered) {
         _isChangeDetectorRegistered = true;
-        Timer.setInterval(1000, _changeDetector);
+        Timer::setInterval(1000, _changeDetector);
     }
 }
 
@@ -443,7 +443,7 @@ void UTime::onDayChange(VoidCallback callback) {
     _onDayChanged = callback;
     if (!_isChangeDetectorRegistered) {
         _isChangeDetectorRegistered = true;
-        Timer.setInterval(1000, _changeDetector);
+        Timer::setInterval(1000, _changeDetector);
     }
 }
 
