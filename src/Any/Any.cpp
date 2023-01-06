@@ -80,8 +80,6 @@ Array::Array()
 Array::Array(const Array &other)
     : m_Data(other.m_Data) {}
 
-Array::Array(const Any &other) {}
-
 Any &Array::operator[](const uint16_t &index) {
     return m_Data.at(index);
 }
@@ -593,7 +591,7 @@ Any::operator String() const {
     }
 }
 
-Any::operator Array &() {
+Any::operator Array &() const {
     if (m_Type != Type::Array) {
         _release();
         m_Type       = Type::Array;

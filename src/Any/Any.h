@@ -172,12 +172,6 @@ class Array : public Printable {
    public:
     Array();
     Array(const Array &other);
-    Array(const Any &other);
-
-    template <typename... T>
-    Array(T... args) {
-        push(args...);
-    }
 
     template <typename... T>
     Array &push(T... args) {
@@ -289,7 +283,7 @@ class Any : public Printable {
     operator double() const;
     operator bool() const;
     operator String() const;
-    operator Array &();
+    operator Array &() const;
 
     template <typename T, typename = typename std::enable_if<std::is_base_of<Object, T>::value>::type>
     operator T () const {
