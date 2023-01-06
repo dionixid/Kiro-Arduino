@@ -8,6 +8,9 @@
  */
 
 #include "src/model/Device.h"
+#include "src/model/Prayer.h"
+#include "src/model/PrayerGroup.h"
+#include "src/model/Qiro.h"
 
 /*----- Relay Pins ------*/
 const uint8_t PIN_RELAY = 4;
