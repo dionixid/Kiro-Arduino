@@ -247,17 +247,12 @@ class Any : public Printable {
     Any(const float &);
     Any(const double &);
     Any(const String &);
-#ifdef ESP32
-    Any(const StringSumHelper &);
-#endif
     Any(const char *);
     Any(const bool &);
     Any(const Array &);
 
-    template <typename T>
+    template <typename T, typename = typename std::enable_if<std::is_base_of<Object, T>::value>::type>
     Any(const T &e) {
-        static_assert(std::is_base_of<Object, T>::value, "T must be derived from Object");
-
         m_Type        = Type::Object;
         m_Data.object = new T(e);
         _validate();
@@ -278,9 +273,6 @@ class Any : public Printable {
     operator double() const;
     operator bool() const;
     operator String() const;
-#ifdef ESP32
-    operator StringSumHelper() const;
-#endif
     operator Array &();
 
     template <typename T, typename = typename std::enable_if<std::is_base_of<Object, T>::value>::type>

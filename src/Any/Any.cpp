@@ -410,15 +410,6 @@ Any::Any(const String &value)
     _validate();
 }
 
-#ifdef ESP32
-Any::Any(const StringSumHelper &value)
-    : m_Type(Type::String),
-      m_IsUnsetObject(false),
-      m_Data(new String(value)) {
-    _validate();
-}
-#endif
-
 Any::Any(const char *value)
     : m_Type(Type::String),
       m_IsUnsetObject(false),
@@ -601,12 +592,6 @@ Any::operator String() const {
             return AnyParser::NULL_;
     }
 }
-
-#ifdef ESP32
-Any::operator StringSumHelper() const {
-    return StringSumHelper(operator String());
-}
-#endif
 
 Any::operator Array &() {
     if (m_Type != Type::Array) {
