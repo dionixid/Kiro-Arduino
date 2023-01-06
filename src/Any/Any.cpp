@@ -3195,3 +3195,4 @@ String AnyParser::serialize(const String &value) {
     result.replace(String(AnyParser::STRING_BRACKET), String(AnyParser::ESCAPE_STRING_BRACKET));
     return String(STRING_BRACKET) + result + String(STRING_BRACKET);
 }
+
