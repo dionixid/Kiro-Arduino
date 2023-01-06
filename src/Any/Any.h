@@ -292,7 +292,7 @@ class Any : public Printable {
     operator Array &();
 
     template <typename T, typename = typename std::enable_if<std::is_base_of<Object, T>::value>::type>
-    operator T &() const {
+    operator T () const {
         if (m_Type == Type::String && m_IsUnsetObject) {
             m_IsUnsetObject = false;
             String str      = *m_Data.string;
