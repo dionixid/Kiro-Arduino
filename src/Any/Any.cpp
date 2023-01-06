@@ -2658,7 +2658,7 @@ size_t Any::printTo(Print &p) const {
  * @brief Delete the data this object contains and set the type to Null.
  *
  */
-void Any::_release() {
+void Any::_release() const {
     if (m_Type == Type::Object) {
         delete m_Data.object;
     } else if (m_Type == Type::Array) {
@@ -2675,7 +2675,7 @@ void Any::_release() {
  * @brief Validate the type and the data this object contains.
  * If the type is Object, Array, or String, but the data is NULL, then change the type to Null.
  */
-void Any::_validate() {
+void Any::_validate() const {
     if ((m_Type == Type::Object || m_Type == Type::Array || m_Type == Type::String) && m_Data.string == NULL) {
         m_Type = Type::Null;
     }

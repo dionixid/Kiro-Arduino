@@ -302,6 +302,33 @@ class Any : public Printable {
         return *static_cast<T *>(m_Data.object);
     }
 
+    template <typename T, typename = typename std::enable_if<std::is_base_of<Object, T>::value>::type>
+    operator T () const {
+        if (m_Type == Type::String && m_IsUnsetObject) {
+            m_IsUnsetObject = false;
+            String str      = *m_Data.string;
+            _release();
+            m_Data = new T();
+            if (m_Data.object) {
+                m_Data.object->constructor(AnyParser::parse(str));
+                m_Type = Type::Object;
+            }
+            _validate();
+        }
+
+        if (m_Type != Type::Object) {
+            _release();
+            m_Data = new T();
+            if (m_Data.object) {
+                m_Data.object->constructor(std::vector<Any>());
+                m_Type = Type::Object;
+            }
+            _validate();
+        }
+
+        return *static_cast<T *>(m_Data.object);
+    }
+
     Any &operator=(const Any &e);
     Any &operator=(Any &&e);
 
@@ -715,12 +742,12 @@ class Any : public Printable {
         }
     };
 
-    Type m_Type;
+    mutable Type m_Type;
     mutable data_t m_Data;
     mutable bool m_IsUnsetObject = false;
 
-    void _release();
-    void _validate();
+    void _release() const;
+    void _validate() const;
     int _compareTo(const Any &other) const;
 };
 
