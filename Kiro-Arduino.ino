@@ -2,7 +2,7 @@
 
 void setup() {
     Serial.begin(115200);
-
+    
     // Test Serialize
     Prayer prayer(Prayer::Name::Fajr, 36000, 2);
     Serial.println(prayer.serialize());
