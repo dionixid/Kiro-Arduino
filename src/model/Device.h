@@ -6,12 +6,13 @@
 struct Device : public Object {
     String id;
     String name;
+    String version;
 
     Device(const bool& isValid = true)
         : m_IsValid(isValid) {}
 
-    Device(String id, String name)
-        : id(id), name(name), m_IsValid(true) {}
+    Device(const String& id, const String &name, const String& version)
+        : id(id), name(name), version(version), m_IsValid(true) {}
 
     void constructor(const std::vector<Any>& tokens) override {
         if (tokens.size() != size()) {
@@ -19,33 +20,34 @@ struct Device : public Object {
             return;
         }
 
-        if (!tokens[0].isString() || !tokens[1].isString()) {
+        if (!tokens[0].isString() || !tokens[1].isString() || !tokens[2].isString()) {
             m_IsValid = false;
             return;
         }
 
         id = tokens[0].toString();
         name = tokens[1].toString();
+        version = tokens[2].toString();
     }
 
     String toString() const override {
-        return stringifyMembers(id, name);
+        return stringifyMembers(id, name, version);
     }
 
     String serialize() const override {
-        return serializeMembers(id, name);
+        return serializeMembers(id, name, version);
     }
 
     bool equals(const Object& other) const override {
         const Device& otherDevice = static_cast<const Device&>(other);
-        return id == otherDevice.id && name == otherDevice.name;
+        return id == otherDevice.id && name == otherDevice.name && version == otherDevice.version;
     }
 
     size_t size() const override {
-        return 2;
+        return 3;
     }
 
-    bool IsValid() const override {
+    bool isValid() const override {
         return m_IsValid;
     }
 
