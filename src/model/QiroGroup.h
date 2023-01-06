@@ -39,17 +39,18 @@ struct QiroGroup : public Object {
             return;
         }
 
-        fajr    = Any::parse(tokens[0].toString());
-        dhuhr   = Any::parse(tokens[1].toString());
-        asr     = Any::parse(tokens[2].toString());
-        maghrib = Any::parse(tokens[3].toString());
-        isha    = Any::parse(tokens[4].toString());
         dayOfWeek = static_cast<DayOfWeek>(tokens[0].toInt());
 
         if (dayOfWeek < DayOfWeek::Monday || dayOfWeek > DayOfWeek::Sunday) {
             m_IsValid = false;
             return;
         }
+
+        fajr      = tokens[1];
+        dhuhr     = tokens[2];
+        asr       = tokens[3];
+        maghrib   = tokens[4];
+        isha      = tokens[5];
 
         if (!fajr || !dhuhr || !asr || !maghrib || !isha) {
             m_IsValid = false;
