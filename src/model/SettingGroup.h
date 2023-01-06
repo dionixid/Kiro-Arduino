@@ -49,11 +49,11 @@ struct SettingGroup : public Object {
     }
 
     String toString() const override {
-        return stringifyMembers(name, settings);
+        return stringifyMembers(name, Array::of(settings));
     }
 
     String serialize() const override {
-        return serializeMembers(name, settings);
+        return serializeMembers(name, Array::of(settings));
     }
 
     bool equals(const Object& other) const override {
