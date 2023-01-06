@@ -4,13 +4,6 @@
 #include "../Any/Any.h"
 #include "Prayer.h"
 
-// - PrayerGroup
-//   - fajr: Prayer
-//   - dhuhr: Prayer
-//   - asr: Prayer
-//   - maghrib: Prayer
-//   - isha: Prayer
-
 struct PrayerGroup : public Object {
     Prayer fajr;
     Prayer dhuhr;
@@ -40,11 +33,11 @@ struct PrayerGroup : public Object {
             return;
         }
 
-        fajr    = Any::parse(tokens[0].toString());
-        dhuhr   = Any::parse(tokens[1].toString());
-        asr     = Any::parse(tokens[2].toString());
-        maghrib = Any::parse(tokens[3].toString());
-        isha    = Any::parse(tokens[4].toString());
+        fajr    = tokens[0];
+        dhuhr   = tokens[1];
+        asr     = tokens[2];
+        maghrib = tokens[3];
+        isha    = tokens[4];
 
         if (!fajr || !dhuhr || !asr || !maghrib || !isha) {
             m_IsValid = false;
@@ -69,7 +62,7 @@ struct PrayerGroup : public Object {
         return 5;
     }
 
-    bool IsValid() const override {
+    bool isValid() const override {
         return m_IsValid;
     }
 
