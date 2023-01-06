@@ -215,6 +215,16 @@ class Array : public Printable {
 
     size_t printTo(Print &p) const;
 
+    template <typename T>
+    static Array of(const std::vector<T> &v) {
+        Array result;
+        result.m_Data.reserve(v.size());
+        for (const T &e : v) {
+            result.m_Data.push_back(e);
+        }
+        return result;
+    }
+
     friend class Any;
 
    private:
