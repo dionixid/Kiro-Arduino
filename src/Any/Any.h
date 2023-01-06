@@ -24,6 +24,12 @@ const String FALSE                 = "false";
 const String NULL_                 = "null";
 const String ESCAPE_STRING_BRACKET = "\\\"";
 
+template <typename T, template <typename...> class R>
+struct is_type_of : std::false_type {};
+
+template <template <typename...> class R, typename... T>
+struct is_type_of<R<T...>, R> : std::true_type {};
+
 std::vector<Any> parse(const String &str);
 }  // namespace AnyParser
 
