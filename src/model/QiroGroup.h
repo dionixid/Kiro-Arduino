@@ -72,11 +72,15 @@ struct QiroGroup : public Object {
     }
 
     size_t size() const override {
-        return 5;
+        return 6;
     }
 
     bool isValid() const {
         return m_IsValid;
+    }
+
+    Object* clone() const override {
+        return new QiroGroup(*this);
     }
 
    private:
