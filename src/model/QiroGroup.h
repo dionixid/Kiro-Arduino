@@ -65,7 +65,8 @@ struct QiroGroup : public Object {
     size_t size() const override {
         return 5;
     }
-    bool IsValid() const override {
+
+    bool isValid() const {
         return m_IsValid;
     }
 
