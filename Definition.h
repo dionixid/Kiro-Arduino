@@ -10,7 +10,14 @@
 #include "src/model/Device.h"
 #include "src/model/Prayer.h"
 #include "src/model/PrayerGroup.h"
+#include "src/model/PrayerTimeOffset.h"
 #include "src/model/Qiro.h"
+#include "src/model/QiroGroup.h"
+#include "src/model/Setting.h"
+#include "src/model/SettingGroup.h"
+#include "src/model/Surah.h"
+#include "src/model/SurahAudio.h"
+#include "src/model/SurahProperties.h"
 
 /*----- Relay Pins ------*/
 const uint8_t PIN_RELAY = 4;
