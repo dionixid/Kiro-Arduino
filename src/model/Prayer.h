@@ -3,6 +3,7 @@
 
 #include "../Any/Any.h"
 
+
 struct Prayer : public Object {
     enum Name : u_int8_t {
         Fajr,
