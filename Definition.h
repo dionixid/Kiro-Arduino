@@ -58,6 +58,13 @@ const uint16_t UDP_PORT = 46525;
 /*-----MAC Address-----*/
 uint8_t MAC_ADDRESS[6] = {0x52, 0x4F, 0x58, 0x00, 0x5A, 0x47};
 
+/*----- Log Tag -----*/
+const String TAG_VERSION  = F("Version");
+const String TAG_WIFI     = F("WiFi");
+const String TAG_DATABASE = F("Database");
+const String TAG_RTTP     = F("RTTP");
+const String TAG_UDP      = F("UDP");
+
 /*----- Instances ------*/
 TinyDB g_DB;
 AsyncUDP g_UDP;

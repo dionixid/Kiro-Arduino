@@ -6,6 +6,8 @@ void setup() {
     // Test Serialize
     Prayer prayer(Prayer::Name::Fajr, 36000, 2);
     Serial.println(prayer.serialize());
+    Log::attach(Serial, Log::Debug);
+    delay(1000);
 
     // Deserial
     Prayer prayer2 = Any::parse("{0,36000,2}");
