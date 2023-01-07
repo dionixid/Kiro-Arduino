@@ -16,6 +16,18 @@ struct SettingGroup : public Object {
           settings(settings),
           m_IsValid(true) {}
 
+    Setting& getSetting(const String& id) {
+        for (auto& e : settings) {
+            if (e.id == id) {
+                return e;
+            }
+        }
+
+        static Setting invalidSetting;
+        invalidSetting = Setting(false);
+        return invalidSetting;
+    }
+
     void constructor(const std::vector<Any>& tokens) override {
         if (tokens.size() != size()) {
             m_IsValid = false;
