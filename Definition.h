@@ -40,9 +40,11 @@ const uint8_t PIN_LED = 13;
 const uint8_t PIN_BUTTON = 2;
 
 /*----- DB Key ------*/
-const String KEY_DEVICE = "device";
-const String KEY_SCHEDULE = "schedule";
-const String KEY_SETTINGS = "settings";
+const String KEY_DEVICE            = F("device");
+const String KEY_SCHEDULES         = F("schedules");
+const String KEY_SETTING_LOCATION  = F("s_location");
+const String KEY_SETTING_WIFI      = F("s_wifi");
+const String KEY_SETTING_SECURITY  = F("s_security");
 
 /*----- Instances ------*/
 // Ex: RTTP::Server server(80);
