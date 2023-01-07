@@ -19,6 +19,7 @@
 #include "src/vendor/Timer/Timer.h"
 #include "src/vendor/TinyDB/TinyDB.h"
 #include "src/vendor/Button/Button.h"
+#include "src/vendor/DFPlayer/DFRobotDFPlayerMini.h"
 #include "src/model/Device.h"
 #include "src/model/Prayer.h"
 #include "src/model/PrayerGroup.h"
