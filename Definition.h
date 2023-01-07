@@ -83,7 +83,10 @@ const String TAG_UDP      = F("UDP");
 /*----- Instances ------*/
 TinyDB g_DB;
 AsyncUDP g_UDP;
+DFRobotDFPlayerMini g_DFPlayer;
+Adafruit_SSD1306 g_OLED(128, 64, &Wire);
 AsyncUDPMessage g_UDPMessage;
+Button g_Button(PIN_BUTTON);
 // Ex: RTTP::Server server(80);
 
 /*----- Variables ------*/
