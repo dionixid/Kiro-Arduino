@@ -266,7 +266,9 @@ Server::Channel& Server::createChannel(const String& channel) {
 
             if (message.topic == RTTP::ALL_TOPICS) {
                 for (auto& handler : m_Channels[c.channel].m_Handlers) {
-                    handler.second(message);
+                    if (handler.second) {
+                        handler.second(message);
+                    }
                 }
                 return;
             }
