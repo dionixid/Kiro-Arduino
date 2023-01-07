@@ -26,7 +26,7 @@ struct Setting : public Object {
     Setting(const bool& isValid = true)
         : m_IsValid(isValid) {}
 
-    Setting(const String& id, const Type& type, const String& label, const Any& value, const bool& isConfidential)
+    Setting(const String& id, const Type& type, const String& label, const Any& value, const bool& isConfidential = false)
         : id(id),
           type(type),
           label(label),
