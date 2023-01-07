@@ -85,11 +85,13 @@ void onPacket(AsyncUDPPacket packet) {
     IPAddress remoteIP  = packet.remoteIP();
     uint16_t remotePort = packet.remotePort();
     String localIP      = remoteIP.toString().startsWith("192.168.4.") ? "192.168.4.1" : WiFi.localIP().toString();
-    if (payload.equals("_kwato._tcp")) {
+
+    if (payload.equals("_kiro._tcp")) {
         g_UDPMessage.flush();
-        g_UDPMessage.print("_kwato._tcp.name:Kwato.id:" + DEVICE_SUID + ".ip:" + localIP + ".local.");
+        g_UDPMessage.print("_kiro._tcp.name:Kwato.id:" + DEVICE_SUID + ".ip:" + localIP + ".local.");
         g_UDP.sendTo(g_UDPMessage, remoteIP, remotePort);
     }
+
     Log::info(
         TAG_UDP, F("Device has been scanned. Payload: %s, ip: %s, port: %s"), payload.c_str(),
         remoteIP.toString().c_str(), String(remotePort).c_str()
