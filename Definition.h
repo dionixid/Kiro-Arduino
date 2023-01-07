@@ -13,14 +13,6 @@
 #include <SPIFFS.h>
 #include <esp_wifi.h>
 
-#include "src/vendor/Log/Log.h"
-#include "src/vendor/RTTP/RTTP.h"
-#include "src/vendor/Time/Time.h"
-#include "src/vendor/Timer/Timer.h"
-#include "src/vendor/TinyDB/TinyDB.h"
-#include "src/vendor/Button/Button.h"
-#include "src/vendor/DFPlayer/DFRobotDFPlayerMini.h"
-#include "src/vendor/Adafruit/SSD1306/Adafruit_SSD1306.h"
 #include "src/model/Device.h"
 #include "src/model/Prayer.h"
 #include "src/model/PrayerGroup.h"
@@ -33,6 +25,13 @@
 #include "src/model/SurahAudio.h"
 #include "src/model/SurahCollection.h"
 #include "src/model/SurahProperties.h"
+#include "src/vendor/Adafruit/SSD1306/Adafruit_SSD1306.h"
+#include "src/vendor/Button/Button.h"
+#include "src/vendor/DFPlayer/DFRobotDFPlayerMini.h"
+#include "src/vendor/Log/Log.h"
+#include "src/vendor/Time/Time.h"
+#include "src/vendor/Timer/Timer.h"
+#include "src/vendor/TinyDB/TinyDB.h"
 
 /*----- Relay Pins ------*/
 const uint8_t PIN_RELAY = 25;
