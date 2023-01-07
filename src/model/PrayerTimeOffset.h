@@ -1,7 +1,7 @@
 #ifndef PRAYER_TIME_OFFSET_H
 #define PRAYER_TIME_OFFSET_H
 
-#include "../Any/Any.h"
+#include "../vendor/Any/Any.h"
 
 struct PrayerTimeOffset : public Object {
     int16_t fajr;

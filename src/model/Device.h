@@ -1,7 +1,7 @@
 #ifndef DEVICE_H
 #define DEVICE_H
 
-#include "../Any/Any.h"
+#include "../vendor/Any/Any.h"
 
 struct Device : public Object {
     String id;

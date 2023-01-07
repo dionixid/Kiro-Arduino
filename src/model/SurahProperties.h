@@ -1,7 +1,7 @@
 #ifndef SURAH_PROPERTIES_H
 #define SURAH_PROPERTIES_H
 
-#include "../Any/Any.h"
+#include "../vendor/Any/Any.h"
 
 struct SurahProperties : public Object {
     uint16_t id;

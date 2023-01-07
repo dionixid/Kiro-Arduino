@@ -1,7 +1,7 @@
 #ifndef DEVICE_UNIT_TEST_H
 #define DEVICE_UNIT_TEST_H
 
-#include "../UnitTest/UnitTest.h"
+#include "../vendor/UnitTest/UnitTest.h"
 #include "../model/Device.h"
 #include "../model/Prayer.h"
 #include "../model/PrayerGroup.h"

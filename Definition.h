@@ -13,11 +13,11 @@
 #include <SPIFFS.h>
 #include <esp_wifi.h>
 
-#include "src/Log/Log.h"
-#include "src/RTTP/RTTP.h"
-#include "src/Time/Time.h"
-#include "src/Timer/Timer.h"
-#include "src/TinyDB/TinyDB.h"
+#include "src/vendor/Log/Log.h"
+#include "src/vendor/RTTP/RTTP.h"
+#include "src/vendor/Time/Time.h"
+#include "src/vendor/Timer/Timer.h"
+#include "src/vendor/TinyDB/TinyDB.h"
 #include "src/model/Device.h"
 #include "src/model/Prayer.h"
 #include "src/model/PrayerGroup.h"

@@ -1,7 +1,7 @@
 #ifndef PRAYER_H
 #define PRAYER_H
 
-#include "../Any/Any.h"
+#include "../vendor/Any/Any.h"
 
 
 struct Prayer : public Object {
