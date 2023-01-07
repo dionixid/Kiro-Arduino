@@ -281,6 +281,79 @@ Array *Array::_clone() const {
 }
 
 /*-----------------------------------------------------------
+ * RAW CLASS IMPLEMENTATION
+ *----------------------------------------------------------*/
+
+/**
+ * @brief Construct a new Raw object from a String.
+ * 
+ * @param data is the String to be used as the data of this Raw object.
+ */
+Raw::Raw(const String& data)
+    : m_Data(data) {}
+
+/**
+ * @brief Get the String representation of this Raw object.
+ * 
+ * @return the String stored in this Raw object.
+ */
+String Raw::toString() const {
+    return m_Data;
+}
+
+/**
+ * @brief Serialize this Raw object into a String.
+ * This method is the same as the toString() method.
+ * 
+ * @return the String stored in this Raw object.
+ */
+String Raw::serialize() const {
+    return m_Data;
+}
+
+/**
+ * @brief Check if this Raw object is equal to another Raw object.
+ * 
+ * @param other is the other Raw object to be compared with.
+ * @return true if this Raw object is equal to the other Raw object. false otherwise.
+ */
+bool Raw::equals(const Raw &other) const {
+    return m_Data == other.m_Data;
+}
+
+/**
+ * @brief Check if this Raw object is equal to another Raw object.
+ * 
+ * @param other is the other Raw object to be compared with.
+ * @return true if this Raw object is equal to the other Raw object. false otherwise.
+ */
+bool Raw::operator==(const Raw &other) const {
+    return equals(other);
+}
+
+/**
+ * @brief Check if this Raw object is not equal to another Raw object.
+ * 
+ * @param other is the other Raw object to be compared with.
+ * @return true if this Raw object is not equal to the other Raw object. false otherwise.
+ */
+bool Raw::operator!=(const Raw &other) const {
+    return !equals(other);
+}
+
+/**
+ * @brief Print this Raw object to a Print object.
+ * This method is used by the Arduino Print class.
+ * The output of this method is the same as the output of the toString() and serialize() method.
+ * 
+ * @param p an Arduino Print object.
+ * @return the number of bytes printed.
+ */
+size_t Raw::printTo(Print &p) const {
+    return p.print(m_Data);
+}
+
+/*-----------------------------------------------------------
  * ANY CLASS IMPLEMENTATION
  *----------------------------------------------------------*/
 
@@ -426,6 +499,11 @@ Any::Any(const Array &value)
       m_Data(value._clone()) {
     _validate();
 }
+
+Any::Any(const Raw &value)
+    : m_Type(Type::Raw),
+      m_IsUnsetObject(false),
+      m_Data(new String(value.m_Data)) {}
 
 /**--- Any Conversion Operator ---**/
 
@@ -578,6 +656,7 @@ Any::operator String() const {
             return m_Data.object->toString();
         case Type::Array:
             return m_Data.array->toString();
+        case Type::Raw:
         case Type::String:
             return *m_Data.string;
         case Type::Integer:
@@ -2274,7 +2353,7 @@ String Any::toString() const {
  * @return A pointer to the string data.
  */
 const char *Any::c_str() const {
-    if (m_Type == Type::String && !m_IsUnsetObject) {
+    if ((m_Type == Type::String || m_Type == Type::Raw) && !m_IsUnsetObject) {
         return m_Data.string->c_str();
     }
     return NULL;
@@ -2296,6 +2375,8 @@ String Any::serialize() const {
             return m_Data.object->serialize();
         case Type::Array:
             return m_Data.array->serialize();
+        case Type::Raw:
+            return *m_Data.string;
         case Type::String:
             if (m_IsUnsetObject) {
                 return *m_Data.string;

@@ -226,6 +226,25 @@ class Array : public Printable {
     Array *_clone() const;
 };
 
+class Raw : public Printable {
+    public:
+     Raw(const String &data);
+    
+     String toString() const;
+     String serialize() const;
+    
+     bool equals(const Raw &other) const;
+     bool operator==(const Raw &other) const;
+     bool operator!=(const Raw &other) const;
+    
+     size_t printTo(Print &p) const;
+    
+     friend class Any;
+    
+    private:
+     String m_Data;
+};
+
 class Any : public Printable {
    public:
     enum class Type : uint8_t {
@@ -235,7 +254,8 @@ class Any : public Printable {
         Float,
         Integer,
         Boolean,
-        Null
+        Null,
+        Raw
     };
 
     Any();
@@ -260,6 +280,7 @@ class Any : public Printable {
     Any(const char *);
     Any(const bool &);
     Any(const Array &);
+    Any(const Raw &);
 
     template <typename T, typename = typename std::enable_if<std::is_base_of<Object, T>::value>::type>
     Any(const T &e) {
