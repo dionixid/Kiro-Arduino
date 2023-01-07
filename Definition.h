@@ -56,6 +56,11 @@ const String DEVICE_SUID = F("5A47");
 // Ex: RTTP::Server server(80);
 
 /*----- Variables ------*/
-Device device;
+Device g_Device;
+SettingGroup g_DateTime;
+SettingGroup g_Location;
+SettingGroup g_WiFi;
+SettingGroup g_Security;
+SettingGroup g_About;
 
 #endif
