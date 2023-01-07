@@ -26,6 +26,14 @@ struct PrayerGroup : public Object {
         return PrayerTimeOffset(fajr.offset, dhuhr.offset, asr.offset, maghrib.offset, isha.offset);
     }
 
+    void setOffset(const PrayerTimeOffset& offset) {
+        fajr.offset    = offset.fajr;
+        dhuhr.offset   = offset.dhuhr;
+        asr.offset     = offset.asr;
+        maghrib.offset = offset.maghrib;
+        isha.offset    = offset.isha;
+    }
+
     void constructor(const std::vector<Any>& tokens) override {
         if (tokens.size() != size()) {
             m_IsValid = false;
