@@ -3,6 +3,7 @@
 
 #include "../Any/Any.h"
 #include "Prayer.h"
+#include "PrayerTimeOffset.h"
 
 struct PrayerGroup : public Object {
     Prayer fajr;
@@ -20,6 +21,10 @@ struct PrayerGroup : public Object {
           asr(asr),
           maghrib(maghrib),
           isha(isha) {}
+
+    PrayerTimeOffset toPrayerTimeOffset() const {
+        return PrayerTimeOffset(fajr.offset, dhuhr.offset, asr.offset, maghrib.offset, isha.offset);
+    }
 
     void constructor(const std::vector<Any>& tokens) override {
         if (tokens.size() != size()) {
