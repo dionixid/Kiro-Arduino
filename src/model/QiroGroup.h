@@ -27,6 +27,23 @@ struct QiroGroup : public Object {
           maghrib(maghrib),
           isha(isha) {}
 
+    Qiro& getQiro(const Prayer::Name& name) {
+        switch (name) {
+            case Prayer::Name::Fajr:
+                return fajr;
+            case Prayer::Name::Dhuhr:
+                return dhuhr;
+            case Prayer::Name::Asr:
+                return asr;
+            case Prayer::Name::Maghrib:
+                return maghrib;
+            case Prayer::Name::Isha:
+                return isha;
+            default:
+                return fajr;
+        }
+    }
+
     void constructor(const std::vector<Any>& tokens) override {
         if (tokens.size() != size()) {
             m_IsValid = false;
@@ -46,11 +63,11 @@ struct QiroGroup : public Object {
             return;
         }
 
-        fajr      = tokens[1];
-        dhuhr     = tokens[2];
-        asr       = tokens[3];
-        maghrib   = tokens[4];
-        isha      = tokens[5];
+        fajr    = tokens[1];
+        dhuhr   = tokens[2];
+        asr     = tokens[3];
+        maghrib = tokens[4];
+        isha    = tokens[5];
 
         if (!fajr || !dhuhr || !asr || !maghrib || !isha) {
             m_IsValid = false;
