@@ -53,6 +53,7 @@ const String DEVICE_UUID = F("7ab16826-e32c-48b9-add6-5b72b1615a47");
 const String DEVICE_SUID = F("5A47");
 
 /*----- Instances ------*/
+TinyDB g_DB;
 // Ex: RTTP::Server server(80);
 
 /*----- Variables ------*/

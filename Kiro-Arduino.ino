@@ -10,6 +10,7 @@ void setup() {
     // Deserial
     Prayer prayer2 = Any::parse("{0,36000,2}");
     Serial.println(prayer2.serialize());
+    initializeDatabase();
 
     // test Validity
     Prayer prayer3 = Any::parse("{0,36000,2}");
