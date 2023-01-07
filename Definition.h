@@ -40,11 +40,17 @@ const uint8_t PIN_LED = 13;
 const uint8_t PIN_BUTTON = 2;
 
 /*----- DB Key ------*/
-const String KEY_DEVICE            = F("device");
-const String KEY_SCHEDULES         = F("schedules");
-const String KEY_SETTING_LOCATION  = F("s_location");
-const String KEY_SETTING_WIFI      = F("s_wifi");
-const String KEY_SETTING_SECURITY  = F("s_security");
+const String KEY_DEVICE             = F("device");
+const String KEY_SCHEDULE_MONDAY    = F("sc_monday");
+const String KEY_SCHEDULE_TUESDAY   = F("sc_tuesday");
+const String KEY_SCHEDULE_WEDNESDAY = F("sc_wednesday");
+const String KEY_SCHEDULE_THURSDAY  = F("sc_thursday");
+const String KEY_SCHEDULE_FRIDAY    = F("sc_friday");
+const String KEY_SCHEDULE_SATURDAY  = F("sc_saturday");
+const String KEY_SCHEDULE_SUNDAY    = F("sc_sunday");
+const String KEY_SETTING_LOCATION   = F("s_location");
+const String KEY_SETTING_WIFI       = F("s_wifi");
+const String KEY_SETTING_SECURITY   = F("s_security");
 
 /*----- Device Credential ------*/
 const String DEVICE_NAME = F("Kiro");
@@ -78,5 +84,12 @@ SettingGroup g_Location;
 SettingGroup g_WiFi;
 SettingGroup g_Security;
 SettingGroup g_About;
+QiroGroup g_QiroMonday;
+QiroGroup g_QiroTuesday;
+QiroGroup g_QiroWednesday;
+QiroGroup g_QiroThursday;
+QiroGroup g_QiroFriday;
+QiroGroup g_QiroSaturday;
+QiroGroup g_QiroSunday;
 
 #endif

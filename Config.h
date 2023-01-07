@@ -47,6 +47,14 @@ void initialize() {
 
     g_About.name = "About";
     g_About.settings.push_back(Setting("A0", Setting::Type::Info, "Version", VERSION));
+
+    g_QiroMonday.dayOfWeek = DayOfWeek::Monday;
+    g_QiroTuesday.dayOfWeek = DayOfWeek::Tuesday;
+    g_QiroWednesday.dayOfWeek = DayOfWeek::Wednesday;
+    g_QiroThursday.dayOfWeek = DayOfWeek::Thursday;
+    g_QiroFriday.dayOfWeek = DayOfWeek::Friday;
+    g_QiroSaturday.dayOfWeek = DayOfWeek::Saturday;
+    g_QiroSunday.dayOfWeek = DayOfWeek::Sunday;
 }
 
 };  // namespace Config

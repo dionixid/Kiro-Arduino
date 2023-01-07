@@ -33,6 +33,34 @@ void loadDatabase() {
     } else {
         g_DB.put(KEY_SETTING_SECURITY, g_Security);
     }
+
+    if (g_DB.contains(KEY_SCHEDULE_MONDAY)) {
+        g_QiroMonday = g_DB.get(KEY_SCHEDULE_MONDAY);
+    }
+
+    if (g_DB.contains(KEY_SCHEDULE_TUESDAY)) {
+        g_QiroTuesday = g_DB.get(KEY_SCHEDULE_TUESDAY);
+    }
+
+    if (g_DB.contains(KEY_SCHEDULE_WEDNESDAY)) {
+        g_QiroWednesday = g_DB.get(KEY_SCHEDULE_WEDNESDAY);
+    }
+
+    if (g_DB.contains(KEY_SCHEDULE_THURSDAY)) {
+        g_QiroThursday = g_DB.get(KEY_SCHEDULE_THURSDAY);
+    }
+
+    if (g_DB.contains(KEY_SCHEDULE_FRIDAY)) {
+        g_QiroFriday = g_DB.get(KEY_SCHEDULE_FRIDAY);
+    }
+
+    if (g_DB.contains(KEY_SCHEDULE_SATURDAY)) {
+        g_QiroSaturday = g_DB.get(KEY_SCHEDULE_SATURDAY);
+    }
+
+    if (g_DB.contains(KEY_SCHEDULE_SUNDAY)) {
+        g_QiroSunday = g_DB.get(KEY_SCHEDULE_SUNDAY);
+    }
 }
 
 void initializeDatabase() {
