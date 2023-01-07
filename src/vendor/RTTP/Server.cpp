@@ -42,7 +42,7 @@ Server::Channel& Server::Channel::onAuth(const AuthHandler& handler) {
  * @param handler is the handler to call when a client is authenticated.
  * @return A reference to the channel instance.
  */
-Server::Channel& Server::Channel::onAuthenticated(const AuthHandler& handler) {
+Server::Channel& Server::Channel::onAuthenticated(const AuthedHandler& handler) {
     m_AuthenticatedHandler = handler;
     return *this;
 }
