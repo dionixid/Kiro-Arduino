@@ -34,7 +34,7 @@ class Server {
         Channel& onAuth(const AuthHandler& handler);
         Channel& onJoin(const ClientHandler& handler);
         Channel& onLeave(const ClientHandler& handler);
-        Channel& addTopic(const String& topic, const MessageHandler& handler);
+        Channel& addTopic(const String& topic, const MessageHandler& handler = NULL);
         Channel& removeTopic(const String& topic);
 
         bool hasTopic(const String& topic) const;
