@@ -162,7 +162,7 @@ DateTime::DateTime(const uint32_t &timestamp, const Timezone &timezone) {
     minute = (sod % 3600) / 60;
     second = sod % 60;
     dayOfWeek = (((timestamp / 86400) + 4) % 7);
-    pasaran = uint32_t(timestamp / 86400.0 + 2440587.5) % 5;
+    pasaran = uint32_t(timestamp / 86400.0 + 3) % 5;
     this->timezone = timezone;
 }
 
