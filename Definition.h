@@ -28,6 +28,7 @@
 #include "src/model/SettingGroup.h"
 #include "src/model/Surah.h"
 #include "src/model/SurahAudio.h"
+#include "src/model/SurahCollection.h"
 #include "src/model/SurahProperties.h"
 
 /*----- Relay Pins ------*/
@@ -79,11 +80,13 @@ AsyncUDPMessage g_UDPMessage;
 
 /*----- Variables ------*/
 Device g_Device;
+
 SettingGroup g_DateTime;
 SettingGroup g_Location;
 SettingGroup g_WiFi;
 SettingGroup g_Security;
 SettingGroup g_About;
+
 QiroGroup g_QiroMonday;
 QiroGroup g_QiroTuesday;
 QiroGroup g_QiroWednesday;
@@ -91,5 +94,13 @@ QiroGroup g_QiroThursday;
 QiroGroup g_QiroFriday;
 QiroGroup g_QiroSaturday;
 QiroGroup g_QiroSunday;
+Qiro g_ongoingQiro;
+
+PrayerGroup g_todayPrayerGroup;
+Prayer g_ongoingPrayer;
+
+SurahAudio g_ongoingSurah;
+SurahAudio g_previewSurah;
+SurahCollection g_surahCollection;
 
 #endif
