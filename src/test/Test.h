@@ -12,6 +12,7 @@
 #include "../model/SettingGroup.h"
 #include "../model/Surah.h"
 #include "../model/SurahAudio.h"
+#include "../model/SurahCollection.h"
 #include "../model/SurahProperties.h"
 
 namespace Test {
@@ -228,6 +229,22 @@ UnitTest::Result runSurahProperties(Print& printer) {
     return surahProperties.run();
 }
 
+UnitTest::Result runSurahCollection(Print& printer) {
+    UnitTest surahCollection("SurahCollection Unit Test");
+
+    surahCollection.assertEqual(
+        "surahCollection_SerializationIsCorrect", "{\"name\",32,12}", SurahCollection("name", 32, 12).serialize()
+    );
+
+    surahCollection.assertEqual(
+        "surahCollection_DeserializationIsCorrect", SurahCollection("name", 32, 12),
+        Any::parse("{\"name\",32,12}").as<SurahCollection>()
+    );
+
+    surahCollection.attach(printer);
+    return surahCollection.run();
+}
+
 UnitTest::Result runAll(Print& printer) {
     UnitTest::Result result;
 
@@ -242,12 +259,10 @@ UnitTest::Result runAll(Print& printer) {
     result += runSurah(printer);
     result += runSurahAudio(printer);
     result += runSurahProperties(printer);
+    result += runSurahCollection(printer);
 
     printer.printf(
-        "Finished %d tests with %d passed and %d failed.", 
-        result.passed + result.failed, 
-        result.passed, 
-        result.failed
+        "Finished %d tests with %d passed and %d failed.", result.passed + result.failed, result.passed, result.failed
     );
 
     return result;
