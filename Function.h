@@ -50,6 +50,43 @@ void initializeDatabase() {
     Log::info(TAG_DATABASE, F("Database has been initialized"));
 }
 
+/*----- Discovery Service -----*/
+
+void onPacket(AsyncUDPPacket packet) {
+    String payload      = packet.readString();
+    IPAddress remoteIP  = packet.remoteIP();
+    uint16_t remotePort = packet.remotePort();
+    String localIP      = remoteIP.toString().startsWith("192.168.4.") ? "192.168.4.1" : WiFi.localIP().toString();
+    if (payload.equals("_kwato._tcp")) {
+        g_UDPMessage.flush();
+        g_UDPMessage.print("_kwato._tcp.name:Kwato.id:" + DEVICE_SUID + ".ip:" + localIP + ".local.");
+        g_UDP.sendTo(g_UDPMessage, remoteIP, remotePort);
+    }
+    Log::info(
+        TAG_UDP, F("Device has been scanned. Payload: %s, ip: %s, port: %s"), payload.c_str(),
+        remoteIP.toString().c_str(), String(remotePort).c_str()
+    );
+}
+
+/*----- Network -----*/
+
+void onWiFiEvent(WiFiEvent_t event) {
+    switch (event) {
+        case SYSTEM_EVENT_STA_CONNECTED: {
+            // TODO Send WiFi State to Server
+            break;
+        }
+        case SYSTEM_EVENT_STA_DISCONNECTED: {
+            // TODO Send WiFi State to Server
+            Log::info(TAG_WIFI, F("Disconnected from %s"), WiFi.SSID().c_str());
+            break;
+        }
+        case SYSTEM_EVENT_STA_GOT_IP: {
+            Log::info(TAG_WIFI, F("Connected with IP: %s"), WiFi.localIP().toString().c_str());
+        }
+    }
+}
+
 void initializeNetwork() {
     WiFi.mode(WIFI_AP_STA);
     WiFi.setHostname(String("kiro-" + DEVICE_SUID).c_str());
@@ -64,6 +101,8 @@ void initializeNetwork() {
     restartAP();
     reconnectSTA();
 
+    g_UDP.listen(UDP_PORT);
+    g_UDP.onPacket(onPacket);
 
     Log::info(TAG_WIFI, F("AP MAC Address: %s"), WiFi.softAPmacAddress().c_str());
     Log::info(TAG_WIFI, F("STA MAC Address: %s"), WiFi.macAddress().c_str());
