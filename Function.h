@@ -50,4 +50,32 @@ void initializeDatabase() {
     Log::info(TAG_DATABASE, F("Database has been initialized"));
 }
 
+void initializeNetwork() {
+    WiFi.mode(WIFI_AP_STA);
+    WiFi.setHostname(String("kiro-" + DEVICE_SUID).c_str());
+    WiFi.softAPsetHostname(String("kiro-" + DEVICE_SUID).c_str());
+    WiFi.onEvent(onWiFiEvent);
+
+    MAC_ADDRESS[3] = 0x01;
+    esp_wifi_set_mac(WIFI_IF_AP, MAC_ADDRESS);
+    MAC_ADDRESS[3] = 0x02;
+    esp_wifi_set_mac(WIFI_IF_STA, MAC_ADDRESS);
+
+    restartAP();
+    reconnectSTA();
+
+
+    Log::info(TAG_WIFI, F("AP MAC Address: %s"), WiFi.softAPmacAddress().c_str());
+    Log::info(TAG_WIFI, F("STA MAC Address: %s"), WiFi.macAddress().c_str());
+}
+
+void reconnectionTask(void*) {
+    while (true) {
+        if (!WiFi.isConnected()) {
+            reconnectSTA();
+        }
+        delay(10000);
+    }
+}
+
 #endif

@@ -52,6 +52,9 @@ const String DEVICE_PASS = F("12345678");
 const String DEVICE_UUID = F("7ab16826-e32c-48b9-add6-5b72b1615a47");
 const String DEVICE_SUID = F("5A47");
 
+/*-----MAC Address-----*/
+uint8_t MAC_ADDRESS[6] = {0x52, 0x4F, 0x58, 0x00, 0x5A, 0x47};
+
 /*----- Instances ------*/
 TinyDB g_DB;
 // Ex: RTTP::Server server(80);
