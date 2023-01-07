@@ -32,6 +32,7 @@ class Server {
         Channel();
         Channel(const String& name);
         Channel& onAuth(const AuthHandler& handler);
+        Channel& onAuthenticated(const AuthHandler& handler);
         Channel& onJoin(const ClientHandler& handler);
         Channel& onLeave(const ClientHandler& handler);
         Channel& addTopic(const String& topic, const MessageHandler& handler = NULL);
@@ -44,6 +45,7 @@ class Server {
        private:
         String m_Name;
         AuthHandler m_AuthHandler    = NULL;
+        AuthHandler m_AuthenticatedHandler    = NULL;
         ClientHandler m_JoinHandler  = NULL;
         ClientHandler m_LeaveHandler = NULL;
         std::map<String, MessageHandler> m_Handlers;

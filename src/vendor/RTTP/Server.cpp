@@ -36,6 +36,18 @@ Server::Channel& Server::Channel::onAuth(const AuthHandler& handler) {
 }
 
 /**
+ * @brief Set a handler to be called when a client is authenticated.
+ * The handler is called after the authentication handler.
+ * 
+ * @param handler is the handler to call when a client is authenticated.
+ * @return A reference to the channel instance.
+ */
+Server::Channel& Server::Channel::onAuthenticated(const AuthHandler& handler) {
+    m_AuthenticatedHandler = handler;
+    return *this;
+}
+
+/**
  * @brief Add a topic to the channel.
  * The topic is a string that is used to identify a message.
  * The handler is called when a message with the topic is received.
@@ -245,6 +257,10 @@ Server::Channel& Server::createChannel(const String& channel) {
             c.name = auth.name;
             c.sendBinary((uint8_t*)"auth-ok", 7);
             sendSubscribers(c.channel);
+            
+            if (m_Channels[c.channel].m_AuthenticatedHandler) {
+                m_Channels[c.channel].m_AuthenticatedHandler(auth);
+            }
         });
 
         client->onTextMessage([this](WSClient& c, const String& textMessage) {
