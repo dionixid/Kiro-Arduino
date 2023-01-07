@@ -35,13 +35,18 @@
 #include "src/model/SurahProperties.h"
 
 /*----- Relay Pins ------*/
-const uint8_t PIN_RELAY = 4;
-
-/*----- LED Pins ------*/
-const uint8_t PIN_LED = 13;
+const uint8_t PIN_RELAY = 25;
 
 /*----- Button Pins ------*/
-const uint8_t PIN_BUTTON = 2;
+const uint8_t PIN_BUTTON = 26;
+
+/*----- DFPlayer Pins ------*/
+const uint8_t PIN_DF_TX = 16;
+const uint8_t PIN_DF_RX = 17;
+
+/*----- OLED Pins ------*/
+const uint8_t PIN_OLED_SDA = 21;
+const uint8_t PIN_OLED_SCL = 22;
 
 /*----- DB Key ------*/
 const String KEY_DEVICE             = F("device");
