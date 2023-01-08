@@ -664,6 +664,9 @@ void UTime::_timeUpdater() {
         rtcCounter = 0;
         _lastTimestamp = _rtc.timestamp();
         _lastUpdate = millis();
+        if (_onUpdate && ::Time.isSet()) {
+            _onUpdate();
+        }
     }
 
     size_t packetLen = _udp.parsePacket();
