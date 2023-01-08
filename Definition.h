@@ -13,6 +13,7 @@
 #include <SPIFFS.h>
 #include <esp_wifi.h>
 
+#include "src/collection/alyssum.h"
 #include "src/model/Device.h"
 #include "src/model/Prayer.h"
 #include "src/model/PrayerGroup.h"

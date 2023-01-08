@@ -62,6 +62,8 @@ void initialize() {
     g_QiroSaturday.dayOfWeek  = DayOfWeek::Saturday;
     g_QiroSunday.dayOfWeek    = DayOfWeek::Sunday;
 
+    g_SurahCollection.name = COLLECTION_NAME;
+    g_SurahCollection.totalSize = sizeof(COLLECTIONS) / sizeof(COLLECTIONS[0]);
 }
 
 };  // namespace Config
