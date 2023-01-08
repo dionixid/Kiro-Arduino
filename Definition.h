@@ -53,6 +53,7 @@ const uint8_t PIN_OLED_SCL = 22;
 
 /*----- DB Key ------*/
 const String KEY_DEVICE             = F("device");
+const String KEY_PRAYER_OFFSET      = F("prayer_offset");
 const String KEY_SCHEDULE_MONDAY    = F("sc_monday");
 const String KEY_SCHEDULE_TUESDAY   = F("sc_tuesday");
 const String KEY_SCHEDULE_WEDNESDAY = F("sc_wednesday");
