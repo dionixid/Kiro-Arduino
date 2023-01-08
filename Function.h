@@ -13,6 +13,16 @@
 #include "Utility.h"
 #include "WebHandler.h"
 
+/*----- Button -----*/
+
+void onButtonPressed() {
+    if (g_SurahOngoing.isPlaying) {
+        forceStopAudio();
+    } else {
+        checkPrayerTime();
+    }
+}
+
 /*----- Audio -----*/
 
 void onStartPlayingAudio() {
