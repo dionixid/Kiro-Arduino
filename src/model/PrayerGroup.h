@@ -22,6 +22,20 @@ struct PrayerGroup : public Object {
           maghrib(maghrib),
           isha(isha) {}
 
+    Prayer& getActivePrayer(const uint32_t secondOfDay) {
+        if (secondOfDay >= fajr.getActualTime() && secondOfDay < dhuhr.getActualTime()) {
+            return fajr;
+        } else if (secondOfDay >= dhuhr.getActualTime() && secondOfDay < asr.getActualTime()) {
+            return dhuhr;
+        } else if (secondOfDay >= asr.getActualTime() && secondOfDay < maghrib.getActualTime()) {
+            return asr;
+        } else if (secondOfDay >= maghrib.getActualTime() && secondOfDay < isha.getActualTime()) {
+            return maghrib;
+        } else {
+            return isha;
+        }
+    }
+
     PrayerTimeOffset toPrayerTimeOffset() const {
         return PrayerTimeOffset(fajr.offset, dhuhr.offset, asr.offset, maghrib.offset, isha.offset);
     }
