@@ -21,6 +21,17 @@ struct Qiro : public Object {
           surahList(surahList),
           m_IsValid(true) {}
 
+    bool isActive(const uint32_t& secondOfDay, const Prayer& activePrayer) const {
+        if (activePrayer.name != name) {
+            return false;
+        }
+
+        uint32_t endSecond = activePrayer.getActualTime();
+        uint32_t startSecond = endSecond - durationMinutes * 60;
+
+        return secondOfDay >= startSecond && secondOfDay < endSecond;
+    }
+
     void constructor(const std::vector<Any>& tokens) override {
         if (tokens.size() != size()) {
             m_IsValid = false;
