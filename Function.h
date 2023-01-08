@@ -13,6 +13,20 @@
 #include "Utility.h"
 #include "WebHandler.h"
 
+/*----- Time -----*/
+
+void onTimeUpdate() {
+    Log::info(TAG_TIME, "Time has been updated.");
+    Log::info(TAG_TIME, Time.now().format("EEEE PPPP, dd MMMM yyyy HH:mm:ss"));
+}
+
+void onMinuteChange() {
+    g_DateTime.getSetting(Config::TIME).value = Time.secondsOfTheDay();
+    g_DateTime.getSetting(Config::DATE).value = Time.now().format("dd-MM-yyyy");
+    publish(RTTP_TOPIC_SETTING_GROUP, g_DateTime);
+    checkPrayerTime();
+}
+
 /*----- Database -----*/
 
 void loadDatabase() {
