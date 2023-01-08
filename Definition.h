@@ -77,6 +77,22 @@ const uint16_t UDP_PORT = 46525;
 /*-----MAC Address-----*/
 uint8_t MAC_ADDRESS[6] = {0x52, 0x4F, 0x58, 0x00, 0x5A, 0x47};
 
+/*----- RTTP -----*/
+const String RTTP_CHANNEL                = F("kiro");
+const String RTTP_TOPIC_DEVICE           = F("device");
+const String RTTP_TOPIC_PRAYER_GROUP     = F("prayer-group");
+const String RTTP_TOPIC_PRAYER_OFFSET    = F("prayer-offset");
+const String RTTP_TOPIC_PRAYER_ONGOING   = F("prayer-ongoing");
+const String RTTP_TOPIC_QIRO_GROUP       = F("qiro-group");
+const String RTTP_TOPIC_QIRO_ONGOING     = F("qiro-ongoing");
+const String RTTP_TOPIC_SETTING_GROUP    = F("setting-group");
+const String RTTP_TOPIC_SETTING_ALL      = F("setting-all");
+const String RTTP_TOPIC_SURAH_COLLECTION = F("surah-collection");
+const String RTTP_TOPIC_SURAH_ONGOING    = F("surah-ongoing");
+const String RTTP_TOPIC_SURAH_PREVIEW    = F("surah-preview");
+const String RTTP_TOPIC_SURAH_FORCE_STOP = F("surah-force-stop");
+const String RTTP_TOPIC_SURAH_LIST       = F("surah-list");
+
 /*----- Log Tag -----*/
 const String TAG_VERSION  = F("Version");
 const String TAG_WIFI     = F("WiFi");
