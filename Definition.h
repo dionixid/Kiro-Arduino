@@ -74,7 +74,7 @@ const String DEVICE_SUID = F("5A47");
 /*----- UDP ------*/
 const uint16_t UDP_PORT = 46525;
 
-/*-----MAC Address-----*/
+/*----- MAC Address -----*/
 uint8_t MAC_ADDRESS[6] = {0x52, 0x4F, 0x58, 0x00, 0x5A, 0x47};
 
 /*----- RTTP -----*/
