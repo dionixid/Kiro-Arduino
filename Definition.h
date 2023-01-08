@@ -43,8 +43,9 @@ const uint8_t PIN_RELAY = 25;
 const uint8_t PIN_BUTTON = 26;
 
 /*----- DFPlayer Pins ------*/
-const uint8_t PIN_DF_TX = 16;
-const uint8_t PIN_DF_RX = 17;
+const uint8_t PIN_DF_RX   = 16;
+const uint8_t PIN_DF_TX   = 17;
+const uint8_t PIN_DF_BUSY = 18;
 
 /*----- OLED Pins ------*/
 const uint8_t PIN_OLED_SDA = 21;
