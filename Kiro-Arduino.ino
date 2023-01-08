@@ -42,6 +42,13 @@ void setup() {
     g_DFPlayer.EQ(DFPLAYER_EQ_NORMAL);
     g_DFPlayer.outputDevice(DFPLAYER_DEVICE_SD);
     g_DFPlayer.volume(20);
+
+    Time.setTimezone(7);
+    Time.enableNTP();
+    Time.enableRTC();
+    Time.onUpdate(onTimeUpdate);
+    Time.onMinuteChange(onMinuteChange);
+
     xTaskCreate(reconnectionTask, "reconnectionTask", 4096, NULL, 5, NULL);
 }
 
