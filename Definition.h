@@ -108,8 +108,10 @@ AsyncUDP g_UDP;
 DFRobotDFPlayerMini g_DFPlayer;
 Adafruit_SSD1306 g_OLED(128, 64, &Wire);
 AsyncUDPMessage g_UDPMessage;
+RTTP::Server g_Server(80);
 Button g_Button(PIN_BUTTON);
-// Ex: RTTP::Server server(80);
+Button g_DFBusy(PIN_DF_BUSY);
+Output g_Relay(PIN_RELAY);
 
 /*----- Variables ------*/
 Device g_Device;
@@ -127,13 +129,16 @@ QiroGroup g_QiroThursday;
 QiroGroup g_QiroFriday;
 QiroGroup g_QiroSaturday;
 QiroGroup g_QiroSunday;
-Qiro g_ongoingQiro;
+Qiro g_QiroOngoing;
 
-PrayerGroup g_todayPrayerGroup;
-Prayer g_ongoingPrayer;
+PrayerTimeOffset g_PrayerOffset;
+PrayerGroup g_PrayerGroup;
+Prayer g_PrayerOngoing;
 
-SurahAudio g_ongoingSurah;
-SurahAudio g_previewSurah;
-SurahCollection g_surahCollection;
+SurahAudio g_SurahOngoing;
+SurahAudio g_SurahPreview;
+SurahCollection g_SurahCollection;
+
+UniTime::Date g_LastPrayerUpdateDate;
 
 #endif
