@@ -30,6 +30,8 @@
 #include "src/vendor/Button/Button.h"
 #include "src/vendor/DFPlayer/DFRobotDFPlayerMini.h"
 #include "src/vendor/Log/Log.h"
+#include "src/vendor/Output/Output.h"
+#include "src/vendor/RTTP/RTTP.h"
 #include "src/vendor/Time/Time.h"
 #include "src/vendor/Timer/Timer.h"
 #include "src/vendor/TinyDB/TinyDB.h"
