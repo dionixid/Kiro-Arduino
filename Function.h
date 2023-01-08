@@ -34,6 +34,10 @@ void loadDatabase() {
         g_DB.put(KEY_SETTING_SECURITY, g_Security);
     }
 
+    if (g_DB.contains(KEY_PRAYER_OFFSET)) {
+        g_PrayerOffset = g_DB.get(KEY_PRAYER_OFFSET);
+    }
+
     if (g_DB.contains(KEY_SCHEDULE_MONDAY)) {
         g_QiroMonday = g_DB.get(KEY_SCHEDULE_MONDAY);
     }
