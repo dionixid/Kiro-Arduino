@@ -13,6 +13,28 @@
 #include "Utility.h"
 #include "WebHandler.h"
 
+/*----- Audio -----*/
+
+void onStartPlayingAudio() {
+    g_AudioTimer.cancel();
+    Log::info(TAG_AUDIO, "Playing");
+}
+
+void onFinishedPlayingAudio() {
+    if (g_SurahPreview.isPlaying) {
+        g_SurahPreview.isPlaying = false;
+        g_SurahPreview.isPaused  = false;
+        publish(RTTP_TOPIC_SURAH_PREVIEW, g_SurahPreview);
+    }
+
+    if (g_SurahOngoing.isPlaying) {
+        playNextSurah();
+    }
+
+    checkPrayerTime();
+    Log::info(TAG_AUDIO, "Finished");
+}
+
 /*----- Time -----*/
 
 void onTimeUpdate() {
