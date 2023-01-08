@@ -107,11 +107,13 @@ void onPacket(AsyncUDPPacket packet) {
 void onWiFiEvent(WiFiEvent_t event) {
     switch (event) {
         case SYSTEM_EVENT_STA_CONNECTED: {
-            // TODO Send WiFi State to Server
+            g_WiFi.getSetting(Config::WIFI_STATUS).value = "connected";
+            publish(RTTP_TOPIC_SETTING_GROUP, g_WiFi);
             break;
         }
         case SYSTEM_EVENT_STA_DISCONNECTED: {
-            // TODO Send WiFi State to Server
+            g_WiFi.getSetting(Config::WIFI_STATUS).value = "disconnected";
+            publish(RTTP_TOPIC_SETTING_GROUP, g_WiFi);
             Log::info(TAG_WIFI, F("Disconnected from %s"), WiFi.SSID().c_str());
             break;
         }
