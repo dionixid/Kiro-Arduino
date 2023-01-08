@@ -26,6 +26,10 @@ struct Prayer : public Object {
           offset(offset),
           m_IsValid(true) {}
 
+    uint32_t getActualTime() const {
+        return time + offset * 60;
+    }
+
     void constructor(const std::vector<Any>& tokens) override {
         if (tokens.size() != size()) {
             m_IsValid = false;
