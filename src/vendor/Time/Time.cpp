@@ -66,6 +66,14 @@ Timezone::Timezone(const double &offset)
 Timezone::Timezone(const int8_t &hour, const int8_t &minute)
     : hour(hour), minute(minute) {}
 
+bool Timezone::operator==(const Timezone &other) const {
+    return hour == other.hour && minute == other.minute;
+}
+
+bool Timezone::operator!=(const Timezone &other) const {
+    return !operator==(other);
+}
+
 double Timezone::toDouble() const {
     return hour + (minute / 60.0);
 }
@@ -92,6 +100,14 @@ Date::Date()
 
 Date::Date(const uint16_t &year, const uint8_t &month, const uint8_t &date)
     : year(year), month(month), date(date) {}
+
+bool Date::operator==(const Date &other) const {
+    return year == other.year && month == other.month && date == other.date;
+}
+
+bool Date::operator!=(const Date &other) const {
+    return !operator==(other);
+}
 
 bool Date::isLeapYear() const {
     return ::isLeapYear(year);
@@ -132,6 +148,14 @@ double UniTime::Time::minutesOfTheDay() const {
 
 double UniTime::Time::hoursOfTheDay() const {
     return hour + (minute / 60.0) + (second / 3600.0);
+}
+
+bool UniTime::Time::operator==(const Time &other) const {
+    return hour == other.hour && minute == other.minute && second == other.second;
+}
+
+bool UniTime::Time::operator!=(const Time &other) const {
+    return !operator==(other);
 }
 
 UniTime::Time UniTime::Time::fromSecondsOfTheDay(const uint32_t &seconds) {
@@ -175,6 +199,15 @@ double DateTime::daysOfTheYear() const {
 
 uint32_t DateTime::timestamp() const {
     return calculateUnixTimestamp(year, month, date, hour, minute, second);
+}
+
+bool DateTime::operator==(const DateTime &other) const {
+    return year == other.year && month == other.month && date == other.date && hour == other.hour 
+    && minute == other.minute && second == other.second && timezone == other.timezone;
+}
+
+bool DateTime::operator!=(const DateTime &other) const {
+    return !operator==(other);
 }
 
 String DateTime::format(const String &fmt) const {
@@ -235,6 +268,17 @@ SolarTime::SolarTime(const DateTime &gregorianDate, const double &latitude, cons
     sunset = Time(12.0 + hourAngleRiseSet / 15.0 + offset);
 }
 
+bool SolarTime::operator==(const SolarTime &other) const {
+    return latitude == other.latitude && longitude == other.longitude && equationOfTime == other.equationOfTime 
+    && declination == other.declination && rightAscension == other.rightAscension && hourAngle == other.hourAngle 
+    && zenithAngle == other.zenithAngle && altitudeAngle == other.altitudeAngle && azimuthAngle == other.azimuthAngle 
+    && offset == other.offset && hourAngleRiseSet == other.hourAngleRiseSet;
+}
+
+bool SolarTime::operator!=(const SolarTime &other) const {
+    return !operator==(other);
+}
+
 double SolarTime::offsetMinute() const {
     return offset * 60.0;
 }
@@ -282,6 +326,14 @@ HijriDate::HijriDate(const DateTime &gregorianDate) {
 HijriDate::HijriDate(const uint16_t &year, const uint8_t &month, const uint8_t &date)
     : year(year), month(month), date(date) {}
 
+bool HijriDate::operator==(const HijriDate &other) const {
+    return year == other.year && month == other.month && date == other.date;
+}
+
+bool HijriDate::operator!=(const HijriDate &other) const {
+    return !operator==(other);
+}
+
 String HijriDate::format(const String &fmt) const {
     return ::format(fmt, true, year, month, date);
 }
@@ -312,6 +364,14 @@ PrayerTime::PrayerTime(const SolarTime &solarTime, const double &elevation) {
 
 PrayerTime::PrayerTime(const uint8_t &fajr, const uint8_t &sunrise, const uint8_t &duha, const uint8_t &dhuhr, const uint8_t &asr, const uint8_t &maghrib, const uint8_t &isha)
     : fajr(fajr), sunrise(sunrise), dhuhr(dhuhr), asr(asr), maghrib(maghrib), isha(isha) {}
+
+bool PrayerTime::operator==(const PrayerTime &other) const {
+    return fajr == other.fajr && sunrise == other.sunrise && dhuhr == other.dhuhr && asr == other.asr && maghrib == other.maghrib && isha == other.isha;
+}
+
+bool PrayerTime::operator!=(const PrayerTime &other) const {
+    return !operator==(other);
+}
 
 /*------ UniTime ------*/
 void UTime::enableRTC() {

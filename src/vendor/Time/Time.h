@@ -38,6 +38,9 @@ struct Timezone {
     Timezone(const double& offset);
     Timezone(const int8_t& hour, const int8_t& minute);
 
+    bool operator==(const Timezone& time) const;
+    bool operator!=(const Timezone& time) const;
+
     double toDouble() const;
     String toString(const bool& rfcPattern = false) const;
 
@@ -52,6 +55,9 @@ struct Date {
 
     Date();
     Date(const uint16_t& year, const uint8_t& month, const uint8_t& date);
+
+    bool operator==(const Date& time) const;
+    bool operator!=(const Date& time) const;
 
     bool isLeapYear() const;
 
@@ -72,6 +78,9 @@ struct Time {
     double minutesOfTheDay() const;
     double hoursOfTheDay() const;
 
+    bool operator==(const Time& time) const;
+    bool operator!=(const Time& time) const;
+
     virtual String format(const String& fmt) const;
 
     static Time fromSecondsOfTheDay(const uint32_t& seconds);
@@ -89,6 +98,9 @@ struct DateTime : public Date, public Time {
 
     double daysOfTheYear() const override;
     uint32_t timestamp() const;
+
+    bool operator==(const DateTime& time) const;
+    bool operator!=(const DateTime& time) const;
 
     String format(const String& fmt) const override;
     SolarTime toSolarTime(const double& latitude, const double& longitude) const;
@@ -108,13 +120,13 @@ struct HijriDate {
     HijriDate(const DateTime& gregorianDate);
     HijriDate(const uint16_t& year, const uint8_t& month, const uint8_t& date);
 
+    bool operator==(const HijriDate& time) const;
+    bool operator!=(const HijriDate& time) const;
+
     String format(const String& fmt) const;
 };
 
 struct SolarTime {
-    SolarTime();
-    SolarTime(const DateTime& gregorianDate, const double& latitude, const double& longitude);
-
     double latitude;
     double longitude;
     double equationOfTime;
@@ -132,9 +144,15 @@ struct SolarTime {
     Time sunrise;
     Time sunset;
 
+    SolarTime();
+    SolarTime(const DateTime& gregorianDate, const double& latitude, const double& longitude);
+
     double offsetMinute() const;
     double offsetSecond() const;
     double hourAngleFromAltitude(const double& altitude) const;
+    
+    bool operator==(const SolarTime& time) const;
+    bool operator!=(const SolarTime& time) const;
 };
 
 struct PrayerTime {
@@ -148,6 +166,9 @@ struct PrayerTime {
     PrayerTime();
     PrayerTime(const SolarTime& solarTime, const double& elevation);
     PrayerTime(const uint8_t& fajr, const uint8_t& sunrise, const uint8_t& duha, const uint8_t& dhuhr, const uint8_t& asr, const uint8_t& maghrib, const uint8_t& isha);
+    
+    bool operator==(const PrayerTime& time) const;
+    bool operator!=(const PrayerTime& time) const;
 };
 
 class DS3231 {
