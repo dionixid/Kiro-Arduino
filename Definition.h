@@ -99,6 +99,8 @@ const String TAG_WIFI     = F("WiFi");
 const String TAG_DATABASE = F("Database");
 const String TAG_RTTP     = F("RTTP");
 const String TAG_UDP      = F("UDP");
+const String TAG_TIME     = F("Time");
+const String TAG_AUDIO    = F("Audio");
 
 /*----- Instances ------*/
 TinyDB g_DB;
