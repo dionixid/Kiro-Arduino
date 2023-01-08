@@ -18,6 +18,26 @@ void setup() {
     initializeDatabase();
     initializeNetwork();
 
+    g_Server.createChannel(RTTP_CHANNEL)
+        .onAuth(onAuth)
+        .onAuthenticated(onAuthenticated)
+        .onJoin(onJoin)
+        .onLeave(onLeave)
+        .addTopic(RTTP_TOPIC_PRAYER_GROUP)
+        .addTopic(RTTP_TOPIC_PRAYER_ONGOING)
+        .addTopic(RTTP_TOPIC_QIRO_ONGOING)
+        .addTopic(RTTP_TOPIC_SETTING_ALL)
+        .addTopic(RTTP_TOPIC_SURAH_ONGOING)
+        .addTopic(RTTP_TOPIC_PRAYER_OFFSET, onTopicPrayerOffset)
+        .addTopic(RTTP_TOPIC_QIRO_GROUP, onTopicQiroGroup)
+        .addTopic(RTTP_TOPIC_SETTING_GROUP, onTopicSettingGroup)
+        .addTopic(RTTP_TOPIC_SURAH_COLLECTION, onTopicSurahCollection)
+        .addTopic(RTTP_TOPIC_SURAH_FORCE_STOP, onTopicSurahForceStop)
+        .addTopic(RTTP_TOPIC_SURAH_LIST, onTopicSurahList)
+        .addTopic(RTTP_TOPIC_SURAH_PREVIEW, onTopicSurahPreview);
+
+    g_Server.begin();
+
     g_DFPlayer.setTimeOut(500);
     g_DFPlayer.EQ(DFPLAYER_EQ_NORMAL);
     g_DFPlayer.outputDevice(DFPLAYER_DEVICE_SD);
