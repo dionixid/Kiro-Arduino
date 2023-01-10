@@ -378,6 +378,7 @@ Any::Any(const Any &other) {
             m_Data.array = other.m_Data.array->_clone();
             break;
         }
+        case Type::Raw:
         case Type::String: {
             m_Data.string = new String(*other.m_Data.string);
             break;
@@ -702,6 +703,7 @@ Any &Any::operator=(const Any &e) {
         case Type::Array:
             m_Data.array = e.m_Data.array->_clone();
             break;
+        case Type::Raw:
         case Type::String:
             m_Data.string = new String(*e.m_Data.string);
             break;
