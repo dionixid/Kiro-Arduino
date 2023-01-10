@@ -2955,9 +2955,9 @@ String AnyParser::toString(const int64_t &value) {
 
     char buf[21];
     uint8_t index = 0;
-    int64_t v     = value;
+    int64_t v     = std::llabs(value);
 
-    while (v > 0) {
+    while (v != 0) {
         buf[index++] = (v % 10) + '0';
         v /= 10;
     }
