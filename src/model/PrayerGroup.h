@@ -13,7 +13,12 @@ struct PrayerGroup : public Object {
     Prayer isha;
 
     PrayerGroup(const bool& IsValid = true)
-        : m_IsValid(IsValid) {}
+        : fajr(Prayer(Prayer::Fajr, 0, 0)),
+          dhuhr(Prayer(Prayer::Dhuhr, 0, 0)),
+          asr(Prayer(Prayer::Asr, 0, 0)),
+          maghrib(Prayer(Prayer::Maghrib, 0, 0)),
+          isha(Prayer(Prayer::Isha, 0, 0)),
+          m_IsValid(IsValid) {}
 
     PrayerGroup(const Prayer& fajr, const Prayer& dhuhr, const Prayer& asr, const Prayer& maghrib, const Prayer& isha)
         : fajr(fajr),
