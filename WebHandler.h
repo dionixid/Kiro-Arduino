@@ -134,7 +134,9 @@ void onTopicSettingGroup(const RTTP::Message& message) {
     }
 
     if (group.name == Config::G_DATE_TIME) {
-        Time.adjust((group.getSetting(Config::DATE).value.toString(), group.getSetting(Config::TIME).value.toInt()));
+        Time.adjust(
+            parseDateTime(group.getSetting(Config::DATE).value.toString(), group.getSetting(Config::TIME).value.toInt())
+        );
         g_DateTime.getSetting(Config::TIME).value = Time.secondsOfTheDay();
         g_DateTime.getSetting(Config::DATE).value = Time.now().format("dd-MM-yyyy");
         g_Server.publish(RTTP_CHANNEL, RTTP_TOPIC_SETTING_GROUP, RTTP::Message::Set, g_DateTime);
