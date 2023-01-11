@@ -29,6 +29,7 @@ void onButtonPressed() {
         g_IsQiroCancelled = false;
         checkPrayerTime();
     }
+    Log::debug(TAG_BUTTON, "Pressed");
 }
 
 /*----- Audio -----*/
