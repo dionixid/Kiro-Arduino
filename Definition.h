@@ -144,4 +144,6 @@ UniTime::Date g_LastPrayerUpdateDate;
 std::vector<std::function<void()>> g_MainThreadQueue;
 SemaphoreHandle_t g_MainThreadQueueMutex = xSemaphoreCreateMutex();
 
+bool g_IsQiroCancelled = false;
+
 #endif
