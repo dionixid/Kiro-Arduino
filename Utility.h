@@ -131,7 +131,7 @@ void checkPrayerTime() {
     updatePrayerQiroOngoing();
 
     if (g_QiroOngoing.isActive(secondOfDay, g_PrayerOngoing)) {
-        if (!g_SurahPreview.isPlaying && !g_SurahOngoing.isPlaying) {
+        if (!g_SurahPreview.isPlaying && !g_SurahOngoing.isPlaying && !g_IsQiroCancelled) {
             playNextSurah(true);
         }
     } else {
