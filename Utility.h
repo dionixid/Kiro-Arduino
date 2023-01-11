@@ -22,7 +22,7 @@ void post(const std::function<void()>& runnable) {
 /*----- WiFi -----*/
 
 void restartAP() {
-    Setting& password = g_WiFi.getSetting(Config::SECURITY_PASSWORD);
+    Setting& password = g_Security.getSetting(Config::SECURITY_PASSWORD);
     WiFi.softAPdisconnect();
     WiFi.softAP(g_Device.name.c_str(), password.value.c_str());
 }
