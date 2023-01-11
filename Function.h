@@ -62,6 +62,7 @@ void onFinishedPlayingAudio() {
 /*----- Time -----*/
 
 void onMinuteChange() {
+    Log::info(TAG_TIME, Time.now().format("EEEE PPPP, dd MMMM yyyy HH:mm:ss"));
     g_DateTime.getSetting(Config::TIME).value = Time.secondsOfTheDay();
     g_DateTime.getSetting(Config::DATE).value = Time.now().format("dd-MM-yyyy");
     publish(RTTP_TOPIC_SETTING_GROUP, g_DateTime);
