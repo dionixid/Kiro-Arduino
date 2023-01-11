@@ -203,6 +203,10 @@ void onTopicSurahForceStop(const RTTP::Message& message) {
 }
 
 void onTopicSurahList(const RTTP::Message& message) {
+    if (message.recipientId != RTTP::SERVER_ID || message.action != RTTP::Message::Get) {
+        return;
+    }
+
     uint16_t progress = 0;
     uint16_t total    = g_SurahCollection.totalSize;
 
@@ -216,6 +220,7 @@ void onTopicSurahList(const RTTP::Message& message) {
 
         g_Server.send(message.senderId, RTTP_CHANNEL, message.topic, RTTP::Message::Set, surahList);
         progress += size;
+        delay(100);
     }
 }
 
