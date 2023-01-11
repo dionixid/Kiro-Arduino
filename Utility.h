@@ -105,9 +105,8 @@ void updatePrayerGroup() {
 }
 
 void updatePrayerQiroOngoing() {
-    uint16_t secondOfDay = Time.secondsOfTheDay();
     QiroGroup& qiroGroup = getCurrentQiroGroup();
-    Prayer& activePrayer = g_PrayerGroup.getActivePrayer(secondOfDay);
+    Prayer& activePrayer = g_PrayerGroup.getActivePrayer(Time.secondsOfTheDay());
 
     if (g_PrayerOngoing != activePrayer) {
         g_PrayerOngoing = activePrayer;
