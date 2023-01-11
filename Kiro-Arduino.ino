@@ -6,7 +6,7 @@ void setup() {
     delay(1000);
     Log::attach(Serial, Log::Debug);
     g_DFPlayer.begin(Serial1);
-    g_OLED.begin();
+    g_OLED.begin(SSD1306_SWITCHCAPVCC, 0x3C);
     g_Button.begin();
     g_DFBusy.begin();
     g_Relay.begin();
