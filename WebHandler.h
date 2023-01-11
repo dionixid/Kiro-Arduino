@@ -45,10 +45,12 @@ void onAuthenticated(const RTTP::Auth& auth) {
     g_Server.send(auth.id, RTTP_CHANNEL, RTTP_TOPIC_SURAH_ONGOING, RTTP::Message::Set, g_SurahOngoing);
     g_Server.send(auth.id, RTTP_CHANNEL, RTTP_TOPIC_SURAH_PREVIEW, RTTP::Message::Set, g_SurahPreview);
     g_Server.send(auth.id, RTTP_CHANNEL, RTTP_TOPIC_DEVICE, RTTP::Message::Set, g_Device);
+    post(Display::showConnectedDevice);
 }
 
 void onLeave(const String& ip, const uint16_t& port, const uint8_t& count) {
     Log::info(TAG_RTTP, "Client left: %s:%d (%d)", ip.c_str(), port, count);
+    post(Display::showConnectedDevice);
 }
 
 void onTopicPrayerOffset(const RTTP::Message& message) {
