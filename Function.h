@@ -40,7 +40,7 @@ void onStartPlayingAudio() {
 }
 
 void onFinishedPlayingAudio() {
-    if (g_SurahPreview.isPlaying) {
+    if (g_SurahPreview.isPlaying && !g_SurahPreview.isPaused) {
         g_SurahPreview.isPlaying = false;
         g_SurahPreview.isPaused  = false;
         publish(RTTP_TOPIC_SURAH_PREVIEW, g_SurahPreview);
