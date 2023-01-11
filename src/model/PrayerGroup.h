@@ -29,15 +29,15 @@ struct PrayerGroup : public Object {
 
     Prayer& getActivePrayer(const uint32_t secondOfDay) {
         if (secondOfDay >= fajr.getActualTime() && secondOfDay < dhuhr.getActualTime()) {
-            return fajr;
-        } else if (secondOfDay >= dhuhr.getActualTime() && secondOfDay < asr.getActualTime()) {
             return dhuhr;
-        } else if (secondOfDay >= asr.getActualTime() && secondOfDay < maghrib.getActualTime()) {
+        } else if (secondOfDay >= dhuhr.getActualTime() && secondOfDay < asr.getActualTime()) {
             return asr;
-        } else if (secondOfDay >= maghrib.getActualTime() && secondOfDay < isha.getActualTime()) {
+        } else if (secondOfDay >= asr.getActualTime() && secondOfDay < maghrib.getActualTime()) {
             return maghrib;
-        } else {
+        } else if (secondOfDay >= maghrib.getActualTime() && secondOfDay < isha.getActualTime()) {
             return isha;
+        } else {
+            return fajr;
         }
     }
 
