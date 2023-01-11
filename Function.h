@@ -74,20 +74,14 @@ void onMinuteChange() {
 void loadDatabase() {
     if (g_DB.contains(KEY_SETTING_LOCATION)) {
         g_Location = g_DB.get(KEY_SETTING_LOCATION);
-    } else {
-        g_DB.put(KEY_SETTING_LOCATION, g_Location);
     }
 
     if (g_DB.contains(KEY_SETTING_WIFI)) {
         g_WiFi = g_DB.get(KEY_SETTING_WIFI);
-    } else {
-        g_DB.put(KEY_SETTING_WIFI, g_WiFi);
     }
 
     if (g_DB.contains(KEY_SETTING_SECURITY)) {
         g_Security = g_DB.get(KEY_SETTING_SECURITY);
-    } else {
-        g_DB.put(KEY_SETTING_SECURITY, g_Security);
     }
 
     if (g_DB.contains(KEY_PRAYER_OFFSET)) {
