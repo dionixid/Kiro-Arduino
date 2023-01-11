@@ -148,7 +148,6 @@ void onTopicSettingGroup(const RTTP::Message& message) {
         g_Security.getSetting(Config::SECURITY_PASSWORD).value = group.getSetting(Config::SECURITY_PASSWORD).value;
         g_Server.publish(RTTP_CHANNEL, RTTP_TOPIC_SETTING_GROUP, RTTP::Message::Set, g_Security);
         g_DB.put(KEY_SETTING_SECURITY, g_Security);
-
         Timer::setTimeout(1000, []() { restartAP(); });
         return;
     }
@@ -158,7 +157,6 @@ void onTopicSettingGroup(const RTTP::Message& message) {
         g_WiFi.getSetting(Config::WIFI_PASSWORD).value = group.getSetting(Config::WIFI_PASSWORD).value;
         g_Server.publish(RTTP_CHANNEL, RTTP_TOPIC_SETTING_GROUP, RTTP::Message::Set, g_WiFi);
         g_DB.put(KEY_SETTING_WIFI, g_WiFi);
-
         Timer::setTimeout(1000, []() { reconnectSTA(); });
         return;
     }
@@ -169,6 +167,7 @@ void onTopicSettingGroup(const RTTP::Message& message) {
         g_Location.getSetting(Config::ELEVATION).value = group.getSetting(Config::ELEVATION).value;
         g_Server.publish(RTTP_CHANNEL, RTTP_TOPIC_SETTING_GROUP, RTTP::Message::Set, g_Location);
         g_DB.put(KEY_SETTING_LOCATION, g_Location);
+        updatePrayerGroup();
         checkPrayerTime();
     }
 }
