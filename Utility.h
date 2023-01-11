@@ -167,6 +167,10 @@ void playNextSurah(bool fromStart) {
     g_DFPlayer.play(surah.id);
 
     publish(RTTP_TOPIC_SURAH_ONGOING, g_SurahOngoing);
+
+    Display::isQiroActive = false;
+    post(Display::showPrayerOngoing);
+    post(Display::showSurahOngoing);
 }
 
 void playPreviewAudio(const SurahAudio& audio) {
