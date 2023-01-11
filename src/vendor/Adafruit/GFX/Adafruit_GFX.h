@@ -180,6 +180,10 @@ public:
   /**********************************************************************/
   void cp437(bool x = true) { _cp437 = x; }
 
+  uint8_t getTextSizeX() {
+    return textsize_x;
+  }
+
   using Print::write;
 #if ARDUINO >= 100
   virtual size_t write(uint8_t);
