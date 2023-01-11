@@ -51,6 +51,9 @@ void setup() {
 
     Display::showBootMessage();
 
+    Timer::setInterval(10000, Display::switchDisplay);
+    Timer::setInterval(50, Display::scrollDisplay);
+    Timer::registerEvent(runMainQueue);
     xTaskCreate(reconnectionTask, "reconnectionTask", 4096, NULL, 5, NULL);
 }
 
