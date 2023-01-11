@@ -51,7 +51,12 @@ void onFinishedPlayingAudio() {
     }
 
     checkPrayerTime();
-    Log::info(TAG_AUDIO, "Finished");
+
+    if (g_SurahPreview.isPaused) {
+        Log::info(TAG_AUDIO, "Paused");
+    } else {
+        Log::info(TAG_AUDIO, "Finished");
+    }
 }
 
 /*----- Time -----*/
