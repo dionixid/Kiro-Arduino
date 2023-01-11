@@ -107,7 +107,7 @@ const String TAG_BUTTON   = F("Button");
 TinyDB g_DB;
 AsyncUDP g_UDP;
 DFRobotDFPlayerMini g_DFPlayer;
-Adafruit_SSD1306 g_OLED(128, 64, &Wire);
+Adafruit_SSD1306 g_OLED(128, 64);
 AsyncUDPMessage g_UDPMessage;
 RTTP::Server g_Server(80);
 Button g_Button(PIN_BUTTON);
