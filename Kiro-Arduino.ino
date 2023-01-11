@@ -49,6 +49,8 @@ void setup() {
     Time.enableRTC();
     Time.onMinuteChange(onMinuteChange);
 
+    Display::showBootMessage();
+
     xTaskCreate(reconnectionTask, "reconnectionTask", 4096, NULL, 5, NULL);
 }
 
