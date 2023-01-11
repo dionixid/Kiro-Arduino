@@ -141,5 +141,7 @@ SurahAudio g_SurahPreview;
 SurahCollection g_SurahCollection;
 
 UniTime::Date g_LastPrayerUpdateDate;
+std::vector<std::function<void()>> g_MainThreadQueue;
+SemaphoreHandle_t g_MainThreadQueueMutex = xSemaphoreCreateMutex();
 
 #endif
