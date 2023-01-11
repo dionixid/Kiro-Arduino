@@ -14,7 +14,13 @@ struct QiroGroup : public Object {
     Qiro isha;
 
     QiroGroup(const bool& IsValid = true)
-        : m_IsValid(IsValid) {}
+        : dayOfWeek(DayOfWeek::Monday),
+          fajr(Qiro(Prayer::Fajr, 0, std::vector<Surah>())),
+          dhuhr(Qiro(Prayer::Dhuhr, 0, std::vector<Surah>())),
+          asr(Qiro(Prayer::Asr, 0, std::vector<Surah>())),
+          maghrib(Qiro(Prayer::Maghrib, 0, std::vector<Surah>())),
+          isha(Qiro(Prayer::Isha, 0, std::vector<Surah>())),
+          m_IsValid(IsValid) {}
 
     QiroGroup(
         const DayOfWeek& dayOfWeek, const Qiro& fajr, const Qiro& dhuhr, const Qiro& asr, const Qiro& maghrib,
