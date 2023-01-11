@@ -163,6 +163,7 @@ void playNextSurah(bool fromStart) {
     g_AudioTimer.setHandler([]() { playNextSurah(); });
     g_AudioTimer.start();
 
+    g_Relay.set(true);
     g_DFPlayer.volume(surah.volume);
     g_DFPlayer.play(surah.id);
 
@@ -194,6 +195,7 @@ void playPreviewAudio(const SurahAudio& audio) {
                 g_SurahPreview.isPaused = false;
                 publish(RTTP_TOPIC_SURAH_PREVIEW, g_SurahPreview);
             } else {
+                g_Relay.set(true);
                 g_DFPlayer.stop();
                 g_DFPlayer.volume(audio.volume);
                 g_DFPlayer.play(audio.id);
@@ -213,6 +215,7 @@ void playPreviewAudio(const SurahAudio& audio) {
     } else {
         if (g_SurahPreview.isPlaying) {
             g_DFPlayer.stop();
+            g_Relay.set(false);
             g_SurahPreview.isPlaying = false;
             g_SurahPreview.isPaused  = false;
             publish(RTTP_TOPIC_SURAH_PREVIEW, g_SurahPreview);
@@ -226,6 +229,7 @@ void forceStopAudio() {
     g_SurahOngoing.isPlaying = false;
     g_SurahOngoing.isPaused  = false;
     g_DFPlayer.stop();
+    g_Relay.set(false);
     publish(RTTP_TOPIC_SURAH_ONGOING, g_SurahOngoing);
     post(Display::showPrayerOngoing);
     post(Display::showSurahOngoing);
