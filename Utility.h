@@ -222,10 +222,13 @@ void playPreviewAudio(const SurahAudio& audio) {
 }
 
 void forceStopAudio() {
+    Display::isQiroActive    = false;
     g_SurahOngoing.isPlaying = false;
     g_SurahOngoing.isPaused  = false;
     g_DFPlayer.stop();
     publish(RTTP_TOPIC_SURAH_ONGOING, g_SurahOngoing);
+    post(Display::showPrayerOngoing);
+    post(Display::showSurahOngoing);
     Log::info(TAG_AUDIO, "Stopped");
 }
 
