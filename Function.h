@@ -154,7 +154,7 @@ void onPacket(AsyncUDPPacket packet) {
 
 /*----- Network -----*/
 
-void onWiFiEvent(WiFiEvent_t event) {
+void onWiFiEvent(WiFiEvent_t event, WiFiEventInfo_t info) {
     switch (event) {
         case SYSTEM_EVENT_STA_CONNECTED: {
             g_WiFi.getSetting(Config::WIFI_STATUS).value = "connected";
@@ -164,11 +164,26 @@ void onWiFiEvent(WiFiEvent_t event) {
         case SYSTEM_EVENT_STA_DISCONNECTED: {
             g_WiFi.getSetting(Config::WIFI_STATUS).value = "disconnected";
             publish(RTTP_TOPIC_SETTING_GROUP, g_WiFi);
-            Log::info(TAG_WIFI, F("Disconnected from %s"), WiFi.SSID().c_str());
+            if (!WiFi.SSID().isEmpty()) {
+                Log::info(TAG_WIFI, F("Disconnected from %s"), WiFi.SSID().c_str());
+            }
             break;
         }
         case SYSTEM_EVENT_STA_GOT_IP: {
             Log::info(TAG_WIFI, F("Connected with IP: %s"), WiFi.localIP().toString().c_str());
+            break;
+        }
+        case SYSTEM_EVENT_AP_STACONNECTED: {
+            Log::info(TAG_WIFI, F("Client connected"));
+            break;
+        }
+        case SYSTEM_EVENT_AP_STAIPASSIGNED: {
+            Log::info(TAG_WIFI, F("IP assigned: %s"), IPAddress(info.wifi_ap_staipassigned.ip.addr).toString().c_str());
+            break;
+        }
+        case SYSTEM_EVENT_AP_STADISCONNECTED: {
+            Log::info(TAG_WIFI, F("Client disconnected"));
+            break;
         }
     }
 }
