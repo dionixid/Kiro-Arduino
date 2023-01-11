@@ -174,7 +174,7 @@ void playPreviewAudio(const SurahAudio& audio) {
             } else {
                 g_DFPlayer.stop();
                 g_DFPlayer.volume(audio.volume);
-                g_DFPlayer.playMp3Folder(audio.id);
+                g_DFPlayer.play(audio.id);
                 g_SurahPreview.id        = audio.id;
                 g_SurahPreview.volume    = audio.volume;
                 g_SurahPreview.isPlaying = true;
