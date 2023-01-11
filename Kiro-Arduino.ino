@@ -46,7 +46,6 @@ void setup() {
     Time.setTimezone(7);
     Time.enableNTP();
     Time.enableRTC();
-    Time.onUpdate(onTimeUpdate);
     Time.onMinuteChange(onMinuteChange);
 
     xTaskCreate(reconnectionTask, "reconnectionTask", 4096, NULL, 5, NULL);
