@@ -218,4 +218,23 @@ void reconnectionTask(void*) {
     }
 }
 
+/*----- Task -----*/
+
+void runMainQueue() {
+    if (g_MainThreadQueue.empty()) {
+        return;
+    }
+
+    xSemaphoreTake(g_MainThreadQueueMutex, portMAX_DELAY);
+    std::vector<std::function<void()>> queue = g_MainThreadQueue;
+    g_MainThreadQueue.clear();
+    xSemaphoreGive(g_MainThreadQueueMutex);
+
+    for (auto& runnable : queue) {
+        if (runnable) {
+            runnable();
+        }
+    }
+}
+
 #endif
