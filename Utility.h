@@ -174,6 +174,13 @@ void playNextSurah(bool fromStart) {
 }
 
 void playPreviewAudio(const SurahAudio& audio) {
+    if (audio.id == g_SurahPreview.id && audio.isPlaying == g_SurahPreview.isPlaying
+        && audio.isPaused == g_SurahPreview.isPaused) {
+        g_DFPlayer.volume(audio.volume);
+        g_SurahPreview.volume = audio.volume;
+        return;
+    }
+
     if (audio.isPlaying) {
         if (audio.isPaused) {
             if (g_SurahPreview.isPlaying && g_SurahPreview.id == audio.id) {
