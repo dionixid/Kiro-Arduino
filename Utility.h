@@ -113,6 +113,9 @@ void updatePrayerQiroOngoing() {
         g_QiroOngoing   = qiroGroup.getQiro(activePrayer.name);
         publish(RTTP_TOPIC_PRAYER_ONGOING, g_PrayerOngoing);
         publish(RTTP_TOPIC_QIRO_ONGOING, g_QiroOngoing);
+        post(Display::showPrayerOngoing);
+        post(Display::showSurahOngoing);
+        g_IsQiroCancelled = false;
     }
 }
 
