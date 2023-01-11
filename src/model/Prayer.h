@@ -3,7 +3,6 @@
 
 #include "../vendor/Any/Any.h"
 
-
 struct Prayer : public Object {
     enum Name : u_int8_t {
         Fajr,
@@ -28,6 +27,35 @@ struct Prayer : public Object {
 
     uint32_t getActualTime() const {
         return time + offset * 60;
+    }
+
+    String getNameString() {
+        switch (name) {
+            case Fajr:
+                return "Subuh";
+            case Dhuhr:
+                return "Dzuhur";
+            case Asr:
+                return "Ashar";
+            case Maghrib:
+                return "Maghrib";
+            case Isha:
+                return "Isya";
+            default:
+                return "Unknown";
+        }
+    }
+
+    String getFormattedTime() {
+        uint8_t hour   = getActualTime() / 3600;
+        uint8_t minute = (getActualTime() % 3600) / 60;
+
+        String result = hour < 10 ? "0" : "";
+        result += hour;
+        result += ":";
+        result += minute < 10 ? "0" : "";
+        result += minute;
+        return result;
     }
 
     void constructor(const std::vector<Any>& tokens) override {
