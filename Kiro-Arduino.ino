@@ -23,6 +23,7 @@ void setup() {
         .onAuthenticated(onAuthenticated)
         .onJoin(onJoin)
         .onLeave(onLeave)
+        .addTopic(RTTP_TOPIC_DEVICE)
         .addTopic(RTTP_TOPIC_PRAYER_GROUP)
         .addTopic(RTTP_TOPIC_PRAYER_ONGOING)
         .addTopic(RTTP_TOPIC_QIRO_ONGOING)
