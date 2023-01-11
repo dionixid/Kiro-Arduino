@@ -142,7 +142,7 @@ void onPacket(AsyncUDPPacket packet) {
 
     if (payload.equals("_kiro._tcp")) {
         g_UDPMessage.flush();
-        g_UDPMessage.print("_kiro._tcp.name:Kwato.id:" + DEVICE_SUID + ".ip:" + localIP + ".local.");
+        g_UDPMessage.print("_kiro._tcp.name:Kiro.id:" + DEVICE_SUID + ".ip:" + localIP + ".local.");
         g_UDP.sendTo(g_UDPMessage, remoteIP, remotePort);
     }
 
