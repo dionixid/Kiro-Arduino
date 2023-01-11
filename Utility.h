@@ -9,6 +9,15 @@
  */
 
 #include "Definition.h"
+#include "Display.h"
+
+/*----- Task -----*/
+
+void post(const std::function<void()>& runnable) {
+    xSemaphoreTake(g_MainThreadQueueMutex, portMAX_DELAY);
+    g_MainThreadQueue.push_back(runnable);
+    xSemaphoreGive(g_MainThreadQueueMutex);
+}
 
 /*----- WiFi -----*/
 
