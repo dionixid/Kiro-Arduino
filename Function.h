@@ -17,8 +17,16 @@
 
 void onButtonPressed() {
     if (g_SurahOngoing.isPlaying) {
+        g_IsQiroCancelled = true;
         forceStopAudio();
+    } else if (g_SurahPreview.isPlaying) {
+        g_SurahPreview.isPlaying = false;
+        g_SurahPreview.isPaused  = false;
+        g_DFPlayer.stop();
+        g_Relay.set(false);
+        publish(RTTP_TOPIC_SURAH_PREVIEW, g_SurahPreview);
     } else {
+        g_IsQiroCancelled = false;
         checkPrayerTime();
     }
 }
