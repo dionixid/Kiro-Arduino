@@ -45,8 +45,8 @@ void initialize() {
 
     g_WiFi.name = G_WIFI;
     g_WiFi.settings.push_back(Setting(WIFI_STATUS, Setting::Type::Info, "Status", "disconnected"));
-    g_WiFi.settings.push_back(Setting(WIFI_SSID, Setting::Type::String, "SSID", ""));
-    g_WiFi.settings.push_back(Setting(WIFI_PASSWORD, Setting::Type::String, "Password", "", true));
+    g_WiFi.settings.push_back(Setting(WIFI_SSID, Setting::Type::WiFi, "SSID", ""));
+    g_WiFi.settings.push_back(Setting(WIFI_PASSWORD, Setting::Type::WiFi, "Password", "", true));
 
     g_Security.name = G_SECURITY;
     g_Security.settings.push_back(Setting(SECURITY_PASSWORD, Setting::Type::String, "Password", DEVICE_PASS, true));
