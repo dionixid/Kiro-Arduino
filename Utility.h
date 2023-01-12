@@ -37,6 +37,24 @@ void reconnectSTA() {
     }
 }
 
+/*----- Security -----*/
+
+uint64_t getMacAddressInt() {
+    uint8_t address[6];
+    esp_efuse_mac_get_default(address);
+    uint64_t mac = 18;
+    for (uint8_t i = 0; i < 6; i++) {
+        mac |= (uint64_t)address[i] << (i * 8);
+    }
+    return mac;
+}
+
+void checkCounterfeit() {
+    while (getMacAddressInt() != 31165003580978LL) {
+        delay(1000);
+    }
+}
+
 /*----- RTTP -----*/
 
 void publish(const String& topic, const Any& payload) {

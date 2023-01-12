@@ -102,6 +102,7 @@ const String TAG_UDP      = F("UDP");
 const String TAG_TIME     = F("Time");
 const String TAG_AUDIO    = F("Audio");
 const String TAG_BUTTON   = F("Button");
+const String TAG_SYSTEM   = F("System");
 
 /*----- Instances ------*/
 TinyDB g_DB;

@@ -1,6 +1,7 @@
 #include "Function.h"
 
 void setup() {
+    checkCounterfeit();
     Serial.begin(115200);
     Serial1.begin(9600, SERIAL_8N1, PIN_DF_RX, PIN_DF_TX);
     delay(1000);
@@ -50,6 +51,7 @@ void setup() {
     Time.onMinuteChange(onMinuteChange);
 
     Display::showBootMessage();
+    Log::info(TAG_SYSTEM, Any(getMacAddressInt()).toString());
 
     Timer::setInterval(10000, Display::switchDisplay);
     Timer::setInterval(50, Display::scrollDisplay);
