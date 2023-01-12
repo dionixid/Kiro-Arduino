@@ -110,13 +110,14 @@ void showSurahOngoing() {
 
     g_OLED.setTextColor(SSD1306_WHITE);
     clearDisplay(44, 8);
+    surahNames.trim();
+    g_OLED.setTextSize(1);
 
     if (getTextWidth(surahNames) > g_OLED.width()) {
         isSurahScrolling = true;
         xSurah           = g_OLED.width();
     } else {
         isSurahScrolling = false;
-        g_OLED.setTextSize(1);
         centerHorizontal(surahNames, 44);
     }
 
@@ -144,13 +145,14 @@ void showConnectedDevice() {
 
     g_OLED.setTextColor(SSD1306_WHITE);
     clearDisplay(56, 8);
+    deviceNames.trim();
+    g_OLED.setTextSize(1);
 
     if (getTextWidth(deviceNames) > g_OLED.width()) {
         isDeviceScrolling = true;
         xDevice           = g_OLED.width();
     } else {
         isDeviceScrolling = false;
-        g_OLED.setTextSize(1);
         centerHorizontal(deviceNames, 56);
     }
 
