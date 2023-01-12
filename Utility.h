@@ -228,6 +228,7 @@ void forceStopAudio() {
     Display::isQiroActive    = false;
     g_SurahOngoing.isPlaying = false;
     g_SurahOngoing.isPaused  = false;
+    g_IsQiroCancelled        = true;
     g_DFPlayer.stop();
     g_Relay.set(false);
     publish(RTTP_TOPIC_SURAH_ONGOING, g_SurahOngoing);
