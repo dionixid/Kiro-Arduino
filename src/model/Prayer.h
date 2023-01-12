@@ -26,7 +26,7 @@ struct Prayer : public Object {
           m_IsValid(true) {}
 
     uint32_t getActualTime() const {
-        return time + offset * 60;
+        return time + (offset * 60) - (time % 60);
     }
 
     String getNameString() {
