@@ -45,6 +45,14 @@ void clearDisplay(const uint16_t& start, const uint16_t& height) {
     g_OLED.fillRect(0, start, g_OLED.width(), height, SSD1306_BLACK);
 }
 
+String getSurahName(uint16_t index) {
+    index        = constrain(index - 1, 0, g_SurahCollection.totalSize - 1);
+    String surah = String(COLLECTIONS[index]);
+    size_t start = surah.indexOf("\"");
+    size_t end   = surah.indexOf("\"", start + 1);
+    return surah.substring(start + 1, end);
+}
+
 void showBootMessage() {
     g_OLED.setTextColor(SSD1306_WHITE);
     g_OLED.clearDisplay();
@@ -83,8 +91,7 @@ void showSurahOngoing() {
     }
 
     if (isQiroActive) {
-        uint16_t index = constrain(g_SurahOngoing.id - 1, 0, g_SurahCollection.totalSize - 1);
-        surahNames     = String(COLLECTIONS[index]);
+        surahNames = getSurahName(g_SurahOngoing.id);
     } else {
         std::vector<Surah> surahList = g_QiroOngoing.surahList;
         surahNames.clear();
@@ -97,8 +104,7 @@ void showSurahOngoing() {
                 surahNames += ", ";
             }
 
-            uint16_t index = constrain(surah.id - 1, 0, g_SurahCollection.totalSize - 1);
-            surahNames += String(COLLECTIONS[index]);
+            surahNames += getSurahName(surah.id);
         }
     }
 
