@@ -184,8 +184,22 @@ void showDateTime() {
 }
 
 void switchDisplay() {
-    isShowingDateTime = !isShowingDateTime;
-    isOnHold          = false;
+    static uint8_t counter = -1;
+    counter++;
+
+    if (counter > 2) {
+        counter = 0;
+    }
+
+    if (counter == 0) {
+        isShowingDateTime = true;
+    } else if (counter == 1) {
+        isShowingDateTime = false;
+    } else {
+        return;
+    }
+
+    isOnHold = false;
 
     if (isShowingDateTime) {
         g_OLED.clearDisplay();
