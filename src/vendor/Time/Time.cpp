@@ -463,6 +463,10 @@ DateTime UTime::now() const {
     return DateTime(_lastTimestamp + ((millis() - _lastUpdate) / 1000) + _timezone, timezone());
 }
 
+DateTime UTime::tomorrow() const {
+    return DateTime(_lastTimestamp + ((millis() - _lastUpdate) / 1000) + _timezone + 86400, timezone());
+}
+
 DateTime UTime::rtc() {
     return _rtc.now();
 }

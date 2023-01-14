@@ -216,6 +216,7 @@ class UniTime {
     uint32_t secondsOfTheDay() const;
     uint16_t minutesOfTheDay() const;
     DateTime now() const;
+    DateTime tomorrow() const;
     DateTime rtc();
     Timezone timezone() const;
     SolarTime solarTime(const double& latitude, const double& longitude) const;
