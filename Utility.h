@@ -50,7 +50,7 @@ uint64_t getMacAddressInt() {
 }
 
 void checkCounterfeit() {
-    while (getMacAddressInt() != 31165003580978LL) {
+    while (getMacAddressInt() != DEVICE_MAC) {
         delay(1000);
     }
 }

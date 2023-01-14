@@ -70,6 +70,7 @@ const String DEVICE_NAME = F("Kiro");
 const String DEVICE_PASS = F("12345678");
 const String DEVICE_UUID = F("7ab16826-e32c-48b9-add6-5b72b1615a47");
 const String DEVICE_SUID = F("5A47");
+const uint64_t DEVICE_MAC = 241906147116594LL;
 
 /*----- UDP ------*/
 const uint16_t UDP_PORT = 46525;
