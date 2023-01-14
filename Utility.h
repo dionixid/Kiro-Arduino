@@ -85,8 +85,8 @@ UniTime::DateTime parseDateTime(const String& date, const uint32_t secondOfDay) 
 void playNextSurah(bool fromStart = false);
 void forceStopAudio();
 
-QiroGroup& getCurrentQiroGroup() {
-    DayOfWeek dow = zeroOnSundayToDayOfWeek(Time.now().dayOfWeek);
+QiroGroup& getQiroGroup(const uint8_t& zeroBasedDOW) {
+    DayOfWeek dow = zeroOnSundayToDayOfWeek(zeroBasedDOW);
     switch (dow) {
         case DayOfWeek::Monday:
             return g_QiroMonday;
@@ -105,12 +105,12 @@ QiroGroup& getCurrentQiroGroup() {
     }
 }
 
-void updatePrayerGroup() {
+void updatePrayerGroup(UniTime::DateTime dateTime) {
     double latitude  = g_Location.getSetting(Config::LATITUDE).value.toDouble();
     double longitude = g_Location.getSetting(Config::LONGITUDE).value.toDouble();
     double elevation = g_Location.getSetting(Config::ELEVATION).value.toDouble();
 
-    UniTime::PrayerTime prayerTime = Time.prayerTime(latitude, longitude, elevation);
+    UniTime::PrayerTime prayerTime = dateTime.toPrayerTime(latitude, longitude, elevation);
 
     g_PrayerGroup.fajr.time    = prayerTime.fajr.secondsOfTheDay();
     g_PrayerGroup.dhuhr.time   = prayerTime.dhuhr.secondsOfTheDay();
@@ -122,9 +122,9 @@ void updatePrayerGroup() {
     publish(RTTP_TOPIC_PRAYER_GROUP, g_PrayerGroup);
 }
 
-void updatePrayerQiroOngoing() {
-    QiroGroup& qiroGroup = getCurrentQiroGroup();
-    Prayer& activePrayer = g_PrayerGroup.getActivePrayer(Time.secondsOfTheDay());
+void updatePrayerQiroOngoing(UniTime::DateTime dateTime) {
+    QiroGroup& qiroGroup = getQiroGroup(dateTime.dayOfWeek);
+    Prayer& activePrayer = g_PrayerGroup.getActivePrayer(dateTime.secondsOfTheDay());
 
     if (g_PrayerOngoing != activePrayer) {
         g_PrayerOngoing = activePrayer;
@@ -138,15 +138,15 @@ void updatePrayerQiroOngoing() {
 }
 
 void checkPrayerTime() {
-    UniTime::Date today  = Time.now().toDate();
-    uint32_t secondOfDay = Time.secondsOfTheDay();
+    uint32_t secondOfDay    = Time.secondsOfTheDay();
+    UniTime::DateTime today = secondOfDay >= g_PrayerGroup.isha.getActualTime() ? Time.tomorrow() : Time.now();
 
-    if (g_LastPrayerUpdateDate != today) {
-        updatePrayerGroup();
-        g_LastPrayerUpdateDate = today;
+    if (g_LastPrayerUpdateDate != today.toDate()) {
+        updatePrayerGroup(today);
+        g_LastPrayerUpdateDate = today.toDate();
     }
 
-    updatePrayerQiroOngoing();
+    updatePrayerQiroOngoing(today);
 
     if (g_QiroOngoing.isActive(secondOfDay, g_PrayerOngoing)) {
         if (!g_SurahPreview.isPlaying && !g_SurahOngoing.isPlaying && !g_IsQiroCancelled) {

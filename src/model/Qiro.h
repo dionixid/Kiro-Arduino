@@ -13,9 +13,7 @@ struct Qiro : public Object {
     Qiro(const bool& IsValid = true)
         : m_IsValid(IsValid) {}
 
-    Qiro(
-        const Prayer::Name& name, const uint16_t& durationMinutes, const std::vector<Surah>& surahList
-    )
+    Qiro(const Prayer::Name& name, const uint16_t& durationMinutes, const std::vector<Surah>& surahList)
         : name(name),
           durationMinutes(durationMinutes),
           surahList(surahList),
@@ -26,8 +24,13 @@ struct Qiro : public Object {
             return false;
         }
 
-        uint32_t endSecond = activePrayer.getActualTime();
-        uint32_t startSecond = endSecond - durationMinutes * 60;
+        uint32_t endSecond   = activePrayer.getActualTime();
+        uint32_t startSecond = endSecond - durationMinutes * 60L;
+
+        if (activePrayer.name == Prayer::Fajr && durationMinutes * 60L > endSecond) {
+            startSecond = 86400 - (durationMinutes * 60L - endSecond);
+            return secondOfDay >= startSecond || secondOfDay < endSecond;
+        }
 
         return secondOfDay >= startSecond && secondOfDay < endSecond;
     }

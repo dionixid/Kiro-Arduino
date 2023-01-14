@@ -64,7 +64,7 @@ void onTopicPrayerOffset(const RTTP::Message& message) {
     }
 
     g_PrayerOffset = offset;
-    updatePrayerGroup();
+    updatePrayerGroup(Time.now());
     checkPrayerTime();
     g_DB.put(KEY_PRAYER_OFFSET, g_PrayerOffset);
 }
@@ -140,6 +140,7 @@ void onTopicSettingGroup(const RTTP::Message& message) {
         g_DateTime.getSetting(Config::TIME).value = Time.secondsOfTheDay();
         g_DateTime.getSetting(Config::DATE).value = Time.now().format("dd-MM-yyyy");
         g_Server.publish(RTTP_CHANNEL, RTTP_TOPIC_SETTING_GROUP, RTTP::Message::Set, g_DateTime);
+        updatePrayerGroup(Time.secondsOfTheDay() >= g_PrayerGroup.isha.getActualTime() ? Time.tomorrow() : Time.now());
         checkPrayerTime();
         return;
     }
@@ -167,7 +168,7 @@ void onTopicSettingGroup(const RTTP::Message& message) {
         g_Location.getSetting(Config::ELEVATION).value = group.getSetting(Config::ELEVATION).value;
         g_Server.publish(RTTP_CHANNEL, RTTP_TOPIC_SETTING_GROUP, RTTP::Message::Set, g_Location);
         g_DB.put(KEY_SETTING_LOCATION, g_Location);
-        updatePrayerGroup();
+        updatePrayerGroup(Time.secondsOfTheDay() >= g_PrayerGroup.isha.getActualTime() ? Time.tomorrow() : Time.now());
         checkPrayerTime();
     }
 }
