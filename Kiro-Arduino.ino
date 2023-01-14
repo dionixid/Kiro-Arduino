@@ -10,7 +10,7 @@ void setup() {
     g_OLED.begin(SSD1306_SWITCHCAPVCC, 0x3C);
     g_Button.begin();
     g_DFBusy.begin();
-    g_Relay.begin();
+    g_Relay.begin(true);
 
     g_Button.onPress(onButtonPressed);
     g_DFBusy.onPress(onStartPlayingAudio);
