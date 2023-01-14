@@ -31,8 +31,8 @@ void reconnectSTA() {
     Setting& ssid     = g_WiFi.getSetting(Config::WIFI_SSID);
     Setting& password = g_WiFi.getSetting(Config::WIFI_PASSWORD);
 
+    WiFi.disconnect();
     if (ssid.value.isNotEmpty()) {
-        WiFi.disconnect();
         WiFi.begin(ssid.value.c_str(), password.value.c_str());
     }
 }
