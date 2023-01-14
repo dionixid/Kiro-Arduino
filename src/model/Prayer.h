@@ -29,7 +29,7 @@ struct Prayer : public Object {
         return time + (offset * 60) - (time % 60);
     }
 
-    String getNameString() {
+    String getNameString() const {
         switch (name) {
             case Fajr:
                 return "Subuh";
@@ -46,7 +46,7 @@ struct Prayer : public Object {
         }
     }
 
-    String getFormattedTime() {
+    String getFormattedTime() const {
         uint8_t hour   = getActualTime() / 3600;
         uint8_t minute = (getActualTime() % 3600) / 60;
 
