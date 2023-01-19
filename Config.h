@@ -29,9 +29,32 @@ const String WIFI_SSID         = F("W1");
 const String WIFI_PASSWORD     = F("W2");
 const String SECURITY_PASSWORD = F("S0");
 
+String generateUUID() {
+    String uuid;
+    uint8_t address[6];
+    esp_efuse_mac_get_default(address);
+    
+    for (uint8_t i = 0; i < DEVICE_MASK.length(); i++) {
+        uuid += address[i % 6] ^ DEVICE_MASK[i];
+    }
+    
+    uuid = Base64::encode(uuid);
+    uuid.replace('+', 'K');
+    uuid.replace('/', 'k');
+    uuid.replace('=', 'z');
+    
+    return uuid;
+}
+
+String getSimpleID() {
+    String id = g_Device.id.substring(g_Device.id.length() - 4);
+    id.toUpperCase();
+    return id;
+}
+
 void initialize() {
-    g_Device.id      = DEVICE_UUID;
-    g_Device.name    = DEVICE_NAME + " " + DEVICE_SUID;
+    g_Device.id      = generateUUID();
+    g_Device.name    = DEVICE_NAME + " " + getSimpleID();
     g_Device.version = VERSION;
 
     g_DateTime.name = G_DATE_TIME;

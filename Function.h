@@ -141,7 +141,7 @@ void onPacket(AsyncUDPPacket packet) {
 
     if (payload.equals("_kiro._tcp")) {
         g_UDPMessage.flush();
-        g_UDPMessage.print("_kiro._tcp.name:Kiro.id:" + DEVICE_SUID + ".ip:" + localIP + ".local.");
+        g_UDPMessage.print("_kiro._tcp.name:Kiro.id:" + Config::getSimpleID() + ".ip:" + localIP + ".local.");
         g_UDP.sendTo(g_UDPMessage, remoteIP, remotePort);
     }
 
@@ -189,9 +189,12 @@ void onWiFiEvent(WiFiEvent_t event, WiFiEventInfo_t info) {
 
 void initializeNetwork() {
     WiFi.mode(WIFI_AP_STA);
-    WiFi.setHostname(String("kiro-" + DEVICE_SUID).c_str());
-    WiFi.softAPsetHostname(String("kiro-" + DEVICE_SUID).c_str());
+    WiFi.setHostname(String("kiro-" + Config::getSimpleID()).c_str());
+    WiFi.softAPsetHostname(String("kiro-" + Config::getSimpleID()).c_str());
     WiFi.onEvent(onWiFiEvent);
+
+    MAC_ADDRESS[4] = getMacAddressInt() >> 32;
+    MAC_ADDRESS[5] = getMacAddressInt() >> 40;
 
     MAC_ADDRESS[3] = 0x01;
     esp_wifi_set_mac(WIFI_IF_AP, MAC_ADDRESS);
