@@ -44,7 +44,7 @@ uint64_t getMacAddressInt() {
     esp_efuse_mac_get_default(address);
     uint64_t mac = 18;
     for (uint8_t i = 0; i < 6; i++) {
-        mac |= (uint64_t)address[i] << (i * 8);
+        mac |= (uint64_t)(address[i] ^ DEVICE_MASK[i]) << (i * 8);
     }
     return mac;
 }
