@@ -17,6 +17,7 @@
 
 void onButtonPressed() {
     if (g_SurahOngoing.isPlaying) {
+        g_IsQiroCancelled = true;
         forceStopAudio();
     } else if (g_SurahPreview.isPlaying) {
         g_SurahPreview.isPlaying = false;
