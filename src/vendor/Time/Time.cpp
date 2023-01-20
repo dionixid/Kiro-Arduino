@@ -210,6 +210,38 @@ bool DateTime::operator!=(const DateTime &other) const {
     return !operator==(other);
 }
 
+DateTime DateTime::plusSeconds(const uint32_t &seconds) {
+    return *this = DateTime(timestamp() + seconds, timezone);
+}
+
+DateTime DateTime::plusMinutes(const uint32_t &minutes) {
+    return *this = DateTime(timestamp() + minutes * 60, timezone);
+}
+
+DateTime DateTime::plusHours(const uint32_t &hours) {
+    return *this = DateTime(timestamp() + hours * 3600, timezone);
+}
+
+DateTime DateTime::plusDays(const uint32_t &days) {
+    return *this = DateTime(timestamp() + days * 86400, timezone);
+}
+
+DateTime DateTime::minusSeconds(const uint32_t &seconds) {
+    return plusSeconds(-seconds);
+}
+
+DateTime DateTime::minusMinutes(const uint32_t &minutes) {
+    return plusMinutes(-minutes);
+}
+
+DateTime DateTime::minusHours(const uint32_t &hours) {
+    return plusHours(-hours);
+}
+
+DateTime DateTime::minusDays(const uint32_t &days) {
+    return plusDays(-days);
+}
+
 String DateTime::format(const String &fmt) const {
     return ::format(fmt, false, year, month, date, hour, minute, second, dayOfWeek, pasaran, timezone.toDouble());
 }

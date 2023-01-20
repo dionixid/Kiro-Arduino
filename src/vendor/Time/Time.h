@@ -102,6 +102,16 @@ struct DateTime : public Date, public Time {
     bool operator==(const DateTime& time) const;
     bool operator!=(const DateTime& time) const;
 
+    DateTime plusSeconds(const uint32_t& seconds);
+    DateTime plusMinutes(const uint32_t& minutes);
+    DateTime plusHours(const uint32_t& hours);
+    DateTime plusDays(const uint32_t& days);
+
+    DateTime minusSeconds(const uint32_t& seconds);
+    DateTime minusMinutes(const uint32_t& minutes);
+    DateTime minusHours(const uint32_t& hours);
+    DateTime minusDays(const uint32_t& days);
+
     String format(const String& fmt) const override;
     SolarTime toSolarTime(const double& latitude, const double& longitude) const;
     PrayerTime toPrayerTime(const double& latitude, const double& longitude, const double& elevation) const;
