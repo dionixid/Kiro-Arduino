@@ -35,8 +35,7 @@ void onButtonPressed() {
 /*----- Audio -----*/
 
 void onStartPlayingAudio() {
-    g_AudioTimer.cancel();
-    Log::info(TAG_AUDIO, "Playing");
+    g_AudioTimeoutTimer.cancel();
 }
 
 void onFinishedPlayingAudio() {
@@ -50,7 +49,9 @@ void onFinishedPlayingAudio() {
         playNextSurah();
     }
 
+#if !SIMULATION
     checkPrayerTime();
+#endif
 
     if (g_SurahPreview.isPaused) {
         Log::info(TAG_AUDIO, "Paused");

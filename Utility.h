@@ -134,6 +134,13 @@ void updatePrayerQiroOngoing(UniTime::DateTime dateTime) {
         post(Display::showPrayerOngoing);
         post(Display::showSurahOngoing);
         g_IsQiroCancelled = false;
+        Log::info(
+            TAG_PRAYER, "Ongoing: %s %s (%s)", g_PrayerOngoing.getNameString().c_str(),
+            UniTime::Time::fromSecondsOfTheDay(g_PrayerOngoing.getActualTime()).format("HH:mm").c_str(),
+            UniTime::Time::fromSecondsOfTheDay(g_PrayerOngoing.getActualTime() - g_QiroOngoing.durationMinutes * 60)
+                .format("HH:mm")
+                .c_str()
+        );
     }
 }
 
@@ -144,6 +151,15 @@ void checkPrayerTime() {
     if (g_LastPrayerUpdateDate != today.toDate()) {
         updatePrayerGroup(today);
         g_LastPrayerUpdateDate = today.toDate();
+        Log::info(TAG_PRAYER, "Prayer group has been updated");
+        Log::info(
+            TAG_PRAYER, "Fajr: %s, Dhuhr: %s, Asr: %s, Maghrib: %s, Isha: %s",
+            UniTime::Time::fromSecondsOfTheDay(g_PrayerGroup.fajr.time).format("HH:mm").c_str(),
+            UniTime::Time::fromSecondsOfTheDay(g_PrayerGroup.dhuhr.time).format("HH:mm").c_str(),
+            UniTime::Time::fromSecondsOfTheDay(g_PrayerGroup.asr.time).format("HH:mm").c_str(),
+            UniTime::Time::fromSecondsOfTheDay(g_PrayerGroup.maghrib.time).format("HH:mm").c_str(),
+            UniTime::Time::fromSecondsOfTheDay(g_PrayerGroup.isha.time).format("HH:mm").c_str()
+        );
     }
 
     updatePrayerQiroOngoing(today);
@@ -161,8 +177,6 @@ void checkPrayerTime() {
 
 /*----- Audio -----*/
 
-CountDownTimer g_AudioTimer;
-
 void playNextSurah(bool fromStart) {
     static uint16_t index = 0;
     index                 = fromStart ? 0 : index + 1;
@@ -177,19 +191,33 @@ void playNextSurah(bool fromStart) {
     g_SurahOngoing.isPlaying = true;
     g_SurahOngoing.isPaused  = false;
 
-    g_AudioTimer.setDuration(5000);
-    g_AudioTimer.setHandler([]() { playNextSurah(); });
-    g_AudioTimer.start();
+    g_AudioTimeoutTimer.setDuration(5000);
+    g_AudioTimeoutTimer.setHandler([]() {
+        Log::error(TAG_AUDIO, "Timed out waiting for audio to start");
+        playNextSurah();
+    });
 
-    g_Relay.set(true);
-    g_DFPlayer.volume(surah.volume);
-    g_DFPlayer.play(surah.id);
+    if (!g_Relay.get()) {
+        g_Relay.set(true);
+        g_AudioPlayTimer.setDuration(5000);
+        g_AudioPlayTimer.setHandler([surah]() {
+            g_AudioTimeoutTimer.start();
+            g_DFPlayer.volume(surah.volume);
+            g_DFPlayer.play(surah.id);
+        });
+        g_AudioPlayTimer.start();
+    } else {
+        g_AudioTimeoutTimer.start();
+        g_DFPlayer.volume(surah.volume);
+        g_DFPlayer.play(surah.id);
+    }
 
     publish(RTTP_TOPIC_SURAH_ONGOING, g_SurahOngoing);
 
     Display::isQiroActive = false;
     post(Display::showPrayerOngoing);
     post(Display::showSurahOngoing);
+    Log::info(TAG_AUDIO, "Playing %d - %s", surah.id, Display::getSurahName(surah.id).c_str());
 }
 
 void playPreviewAudio(const SurahAudio& audio) {
@@ -243,6 +271,8 @@ void playPreviewAudio(const SurahAudio& audio) {
 }
 
 void forceStopAudio() {
+    g_AudioPlayTimer.cancel();
+    g_AudioTimeoutTimer.cancel();
     Display::isQiroActive    = false;
     g_SurahOngoing.isPlaying = false;
     g_SurahOngoing.isPaused  = false;

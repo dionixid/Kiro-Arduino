@@ -2,6 +2,8 @@
 #define DEFINITION_H
 
 #define VERSION "1.0.0"
+#define DEBUG true
+#define SIMULATION false
 
 /**
  * This file contains all the definitions used in the project.
@@ -66,9 +68,9 @@ const String KEY_SETTING_WIFI       = F("s_wifi");
 const String KEY_SETTING_SECURITY   = F("s_security");
 
 /*----- Device Credential ------*/
-const String DEVICE_NAME = F("Kiro");
-const String DEVICE_PASS = F("12345678");
-const String DEVICE_MASK = F("tXEoN92q");
+const String DEVICE_NAME  = F("Kiro");
+const String DEVICE_PASS  = F("12345678");
+const String DEVICE_MASK  = F("tXEoN92q");
 const uint64_t DEVICE_MAC = 40777588842070LL;
 
 /*----- MAC Address -----*/
@@ -94,15 +96,17 @@ const String RTTP_TOPIC_SURAH_FORCE_STOP = F("surah-force-stop");
 const String RTTP_TOPIC_SURAH_LIST       = F("surah-list");
 
 /*----- Log Tag -----*/
-const String TAG_VERSION  = F("Version");
-const String TAG_WIFI     = F("WiFi");
-const String TAG_DATABASE = F("Database");
-const String TAG_RTTP     = F("RTTP");
-const String TAG_UDP      = F("UDP");
-const String TAG_TIME     = F("Time");
-const String TAG_AUDIO    = F("Audio");
-const String TAG_BUTTON   = F("Button");
-const String TAG_SYSTEM   = F("System");
+const String TAG_VERSION   = F("Version");
+const String TAG_WIFI      = F("WiFi");
+const String TAG_DATABASE  = F("Database");
+const String TAG_RTTP      = F("RTTP");
+const String TAG_UDP       = F("UDP");
+const String TAG_TIME      = F("Time");
+const String TAG_AUDIO     = F("Audio");
+const String TAG_BUTTON    = F("Button");
+const String TAG_SYSTEM    = F("System");
+const String TAG_PRAYER    = F("Prayer");
+const String TAG_SIMULATOR = F("Simulator");
 
 /*----- Instances ------*/
 TinyDB g_DB;
@@ -144,6 +148,9 @@ SurahCollection g_SurahCollection;
 UniTime::Date g_LastPrayerUpdateDate;
 std::vector<std::function<void()>> g_MainThreadQueue;
 SemaphoreHandle_t g_MainThreadQueueMutex = xSemaphoreCreateMutex();
+
+CountDownTimer g_AudioTimeoutTimer;
+CountDownTimer g_AudioPlayTimer;
 
 bool g_IsQiroCancelled = false;
 

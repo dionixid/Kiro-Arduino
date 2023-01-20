@@ -1,16 +1,27 @@
 #include "Function.h"
 
+#if DEBUG
+#pragma message("Debug mode is enabled")
+#endif
+
+#if SIMULATION
+#include "Simulation.h"
+#pragma message("Simulation mode is enabled")
+#endif
+
 void setup() {
     checkCounterfeit();
-    Serial.begin(115200);
     Serial1.begin(9600, SERIAL_8N1, PIN_DF_RX, PIN_DF_TX);
+#if DEBUG
+    Serial.begin(115200);
     delay(1000);
     Log::attach(Serial, Log::Debug);
+#endif
     g_DFPlayer.begin(Serial1);
     g_OLED.begin(SSD1306_SWITCHCAPVCC, 0x3C);
     g_Button.begin();
     g_DFBusy.begin();
-    g_Relay.begin(true);
+    g_Relay.begin(false);
 
     g_Button.onPress(onButtonPressed);
     g_DFBusy.onPress(onStartPlayingAudio);
@@ -48,7 +59,9 @@ void setup() {
     Time.setTimezone(7);
     Time.enableNTP();
     Time.enableRTC();
+#if !SIMULATION
     Time.onMinuteChange(onMinuteChange);
+#endif
 
     Display::showBootMessage();
     Log::info(TAG_SYSTEM, Any(getMacAddressInt()).toString());
@@ -57,8 +70,31 @@ void setup() {
     Timer::setInterval(50, Display::scrollDisplay);
     Timer::registerEvent(runMainQueue);
     xTaskCreate(reconnectionTask, "reconnectionTask", 4096, NULL, 5, NULL);
+
+#if SIMULATION
+    Simulation::initialize();
+#endif
 }
 
 void loop() {
     Timer::run();
+
+#if SIMULATION
+    if (Serial.available()) {
+        String command = Serial.readString();
+        command.trim();
+        command.toLowerCase();
+
+        if (command == "a") {
+            Simulation::time.start();
+        } else if (command == "s") {
+            Simulation::time.stop();
+            forceStopAudio();
+        } else if (command == "p") {
+            Simulation::time.pause();
+        } else if (command == "r") {
+            Simulation::time.resume();
+        }
+    }
+#endif
 }
