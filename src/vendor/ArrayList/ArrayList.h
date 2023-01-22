@@ -80,7 +80,7 @@ class ArrayList {
     };
 
     /**
-     * @brief Creates an empty ArrayList.
+     * @brief Create empty ArrayList.
      *
      */
     ArrayList()
@@ -91,7 +91,7 @@ class ArrayList {
     }
 
     /**
-     * @brief Creates ArrayList from another ArrayList.
+     * @brief Create ArrayList from another ArrayList.
      *
      * @param other is the ArrayList to copy from.
      */
@@ -105,7 +105,7 @@ class ArrayList {
     }
 
     /**
-     * @brief Creates ArrayList from another ArrayList.
+     * @brief Create ArrayList from another ArrayList.
      *
      * @param other is the ArrayList to move from.
      */
@@ -115,7 +115,7 @@ class ArrayList {
     }
 
     /**
-     * @brief Creates ArrayList from an array.
+     * @brief Create ArrayList from an array.
      *
      * @param arr is the array to copy from.
      * @param len is the length of the array.
@@ -132,10 +132,10 @@ class ArrayList {
     }
 
     /**
-     * @brief Creates ArrayList from a variadic list of arguments.
+     * @brief Create ArrayList from a variadic arguments.
      *
      * @tparam Args must be the same type as T.
-     * @param args is the variadic list of arguments.
+     * @param args is the variadic arguments.
      */
     template <typename... Args>
     ArrayList(Args... args)
@@ -151,7 +151,7 @@ class ArrayList {
     }
 
     /**
-     * @brief Adds an element to the end of the ArrayList.
+     * @brief Add an element to the end of the ArrayList.
      *
      * @param element is the element to add.
      * @return true if the element was added successfully.
@@ -166,7 +166,7 @@ class ArrayList {
     }
 
     /**
-     * @brief Adds an element to the end of the ArrayList.
+     * @brief Add an element to the end of the ArrayList.
      *
      * @param element is the element to add.
      * @return true if the element was added successfully.
@@ -181,12 +181,12 @@ class ArrayList {
     }
 
     /**
-     * @brief Adds from another ArrayList to the end of this ArrayList.
+     * @brief Add from another ArrayList to the end of this ArrayList.
      *
      * @param other is the ArrayList to add from.
      * @return true if the element was added successfully.
      */
-    bool add(const ArrayList& other) {
+    bool addAll(const ArrayList& other) {
         if (m_Size + other.m_Size >= m_Capacity) {
             if (!_reallocate(m_Capacity + other.m_Capacity)) return false;
         }
@@ -207,7 +207,7 @@ class ArrayList {
     }
 
     /**
-     * @brief Removes an element from the ArrayList.
+     * @brief Remove an element from the ArrayList.
      *
      * @param element is the element to remove.
      */
@@ -216,7 +216,7 @@ class ArrayList {
     }
 
     /**
-     * @brief Removes an element from the ArrayList.
+     * @brief Remove an element from the ArrayList.
      *
      * @param index is the index of the element to remove.
      */
@@ -230,7 +230,7 @@ class ArrayList {
 
 #if defined(ESP32) || defined(ESP8266)
     /**
-     * @brief Removes elements from the ArrayList that match the predicate.
+     * @brief Remove elements from the ArrayList that match the predicate.
      *
      * @param predicate is the predicate to match.
      */
@@ -244,7 +244,7 @@ class ArrayList {
     }
 #else
     /**
-     * @brief Removes elements from the ArrayList that match the predicate.
+     * @brief Remove elements from the ArrayList that match the predicate.
      *
      * @param predicate is the predicate to match.
      */
@@ -260,7 +260,7 @@ class ArrayList {
 #endif
 
     /**
-     * @brief Checks if the ArrayList contains an element.
+     * @brief Check if the ArrayList contains an element.
      *
      * @param element is the element to check for.
      * @return true if the element is in the ArrayList.
@@ -274,7 +274,7 @@ class ArrayList {
 
 #if defined(ESP32) || defined(ESP8266)
     /**
-     * @brief Checks if the ArrayList contains an element that matches the predicate.
+     * @brief Check if the ArrayList contains an element that matches the predicate.
      *
      * @param predicate is the predicate to match.
      * @return true if the element is in the ArrayList.
@@ -287,7 +287,7 @@ class ArrayList {
     }
 #else
     /**
-     * @brief Checks if the ArrayList contains an element that matches the predicate.
+     * @brief Check if the ArrayList contains an element that matches the predicate.
      *
      * @param predicate is the predicate to match.
      * @return true if the element is in the ArrayList.
