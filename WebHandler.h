@@ -199,6 +199,7 @@ void onTopicSurahForceStop(const RTTP::Message& message) {
     }
 
     if (message.payload.isBool() && message.payload) {
+        g_IsQiroCancelled = true;
         forceStopAudio();
     }
 }
